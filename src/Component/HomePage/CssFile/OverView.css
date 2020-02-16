@@ -1,0 +1,85 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+html {
+  image-rendering: optimizeQuality;
+  text-rendering: optimizeLegibility;
+}
+.clue {
+  width: 100%;
+  height: 30%;
+  position: absolute;
+  top: 68%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.clue h4 {
+  padding-left: 3%;
+}
+.clue p {
+  padding-left: 3%;
+}
+
+.mem {
+  background: linear-gradient(#7a02ca, #370594);
+  width: 35%;
+  height: 25vh;
+  display: flex;
+  flex-direction: column;
+  margin-right: 4%;
+  filter: drop-shadow(0px 10px #cabee0);
+  outline: none;
+}
+
+.sta {
+  background-color: #fff;
+  color: #494ca2;
+  width: 35%;
+  height: 25vh;
+  display: flex;
+  flex-direction: column;
+  margin-right: 4%;
+  filter: drop-shadow(0px 10px #cabee0);
+  outline: none;
+}
+.hel {
+  background-color: #fff;
+  color: #494ca2;
+  width: 35%;
+  height: 25vh;
+  display: flex;
+  flex-direction: column;
+  margin-right: 4%;
+  filter: drop-shadow(0px 10px #cabee0);
+  outline: none;
+}
+.log {
+  background-color: #fff;
+  color: #494ca2;
+  width: 35%;
+  height: 25vh;
+  display: flex;
+  flex-direction: column;
+  filter: drop-shadow(0px 10px #cabee0);
+  outline: none;
+}
+.top-List {
+  display: flex;
+  justify-content: space-around;
+  color: #fff;
+  width: 50%;
+}
+.top-List img {
+  display: flex;
+  flex-direction: column;
+  width: 20px;
+  padding-top: 4%;
+  padding-left: 3%;
+}
+.top-List a {
+  color: #fff;
+  text-decoration: none;
+}
