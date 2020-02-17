@@ -8,7 +8,7 @@ body {
       rgba(255, 255, 255, 0.938),
       rgba(255, 255, 255, 0)
     ),
-    url("../HomePage/Images/white4.jpg");
+    url("../../HomePage/Images/white4.jpg");
   background-size: cover;
   background-repeat: round;
   background-attachment: fixed;
@@ -66,53 +66,6 @@ body {
   letter-spacing: 0.2px;
   font-family: "Patrick Hand SC", cursive;
   font-size: larger;
-}
-
-/* button[name="signin"] { */
-/* position: absolute;
-  top: 30%;
-  left: 50%;
-  transform: translate(-50%, -60%);
-  width: 30%;
-  height: 5.3vh;
-  background: linear-gradient(#494ca2, #8185d5);
-  border-radius: 12px;
-  color: #fff;
-  outline: none;
-  border-style: none;
-  letter-spacing: 0.2px;
-  font-family: "Patrick Hand SC", cursive;
-  font-size: larger; */
-/* } */
-button[name="signup"] {
-  position: absolute;
-  top: 83vh;
-  left: 45em;
-  width: 15%;
-  height: 5.3vh;
-  background: linear-gradient(#494ca2, #8186d5);
-  color: #fff;
-  outline: none;
-  border-style: none;
-  font-family: "Patrick Hand SC", cursive;
-  font-size: larger;
-  border-radius: 12px;
-}
-
-button[name="Login"] {
-  position: absolute;
-  top: 32vh;
-  left: 45em;
-  width: 15%;
-  height: 5.3vh;
-  background: linear-gradient(#494ca2, #8186d5);
-  color: #fff;
-  outline: none;
-  border-style: none;
-  display: none;
-  font-family: "Patrick Hand SC", cursive;
-  font-size: larger;
-  border-radius: 12px;
 }
 
 .reg {
