@@ -42,10 +42,8 @@ class SignInSignUp extends Component {
         <div className="signup">
           <GetStarted />
           <div className="cont">
-            <form autoCapitalize="off">
-              {this.state.displayForm && <SignUp />}
-              {this.state.displaySignInBut && <SignIn />}
-            </form>
+            {this.state.displayForm && <SignUp />}
+            {this.state.displaySignInBut && <SignIn />}
           </div>
         </div>
 
