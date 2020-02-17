@@ -36,13 +36,23 @@ class SignInSignUp extends Component {
       displaySignUpBut: !this.state.displaySignUpBut
     });
   };
+  handleDisplaySignInOnSignUpClick = () => {
+    this.setState({
+      displayForm: !this.state.displayForm,
+      displaySignInBut: !this.state.displaySignInBut,
+      displaySignInBut_bt: this.state.displaySignInBut_bt,
+      displaySignUpBut: this.state.displaySignUpBut
+    });
+  };
   render() {
     return (
       <>
         <div className="signup">
           <GetStarted />
           <div className="cont">
-            {this.state.displayForm && <SignUp />}
+            {this.state.displayForm && (
+              <SignUp signin={this.handleDisplaySignInOnSignUpClick} />
+            )}
             {this.state.displaySignInBut && <SignIn />}
           </div>
         </div>

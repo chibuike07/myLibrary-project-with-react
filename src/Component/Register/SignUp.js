@@ -30,7 +30,7 @@ class Signup extends React.Component {
     if (fname === "") {
       alert("First name must not be left empty");
       this.refs.fname.focus();
-      return;
+      return false;
     } else if (this.isNumeric(fname)) {
       alert("Number is not an option");
       this.refs.fname.focus();
@@ -75,6 +75,10 @@ class Signup extends React.Component {
       alert("Password must not be left empty");
       this.refs.pwrd.focus();
       return false;
+    } else if (pwrd.length < 8) {
+      alert("Password must not be less 8 characters");
+      this.refs.pwrd.focus();
+      return false;
     }
     this.setState({
       userData: this.state.userData.concat({
@@ -92,7 +96,6 @@ class Signup extends React.Component {
       })
     });
     this.refs.form.reset();
-    // console.log(this.refs);
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -100,8 +103,10 @@ class Signup extends React.Component {
       const storage = JSON.stringify(this.state.userData);
       localStorage.setItem("userDatas", storage);
       console.log(JSON.parse(localStorage.getItem("userDatas")));
+      this.props.signin();
     }
   }
+
   render() {
     console.log(this.state.userData);
     return (
