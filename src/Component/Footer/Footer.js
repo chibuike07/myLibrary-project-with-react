@@ -114,7 +114,7 @@ class Footer extends Component {
           <Categories />
           <EasyLink />
         </div>
-        <div class="ryt">
+        <div className="ryt">
           <h4>copyright 2019 christopher university</h4>
         </div>
       </footer>

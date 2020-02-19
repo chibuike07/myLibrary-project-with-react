@@ -1,12 +1,3 @@
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
-html {
-  image-rendering: optimizeQuality;
-  text-rendering: optimizeLegibility;
-}
 .about {
   display: flex;
   justify-content: space-between;

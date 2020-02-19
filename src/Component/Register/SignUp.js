@@ -3,7 +3,6 @@ import "./Register_css/SignUp.css";
 
 class Signup extends React.Component {
   state = {
-    userData: [],
     img: [],
     borrowedBooks: [],
     reserveBook: [],
@@ -15,6 +14,7 @@ class Signup extends React.Component {
   };
 
   handleUSerSigUp = e => {
+    let array = [];
     e.preventDefault();
     let fname = this.refs.fname.value;
     let lname = this.refs.lname.value;
@@ -80,35 +80,33 @@ class Signup extends React.Component {
       this.refs.pwrd.focus();
       return false;
     }
-    this.setState({
-      userData: this.state.userData.concat({
-        fname,
-        lname,
-        gender,
-        dsp,
-        num,
-        email,
-        pwrd,
-        img,
-        borrowedBooks,
-        reserveBook,
-        id
-      })
-    });
+    let userObject = {
+      fname,
+      lname,
+      gender,
+      dsp,
+      num,
+      email,
+      pwrd,
+      img,
+      borrowedBooks,
+      reserveBook,
+      id
+    };
+    if (localStorage.getItem("userDatas") === null) {
+      array.push(userObject);
+      localStorage.setItem("userDatas", JSON.stringify(array));
+    } else {
+      let array = JSON.parse(localStorage.getItem("userDatas"));
+      array.push(userObject);
+      localStorage.setItem("userDatas", JSON.stringify(array));
+    }
+
+    this.props.signin();
     this.refs.form.reset();
   };
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.userData.length !== this.state.userData.length) {
-      const storage = JSON.stringify(this.state.userData);
-      localStorage.setItem("userDatas", storage);
-      console.log(JSON.parse(localStorage.getItem("userDatas")));
-      this.props.signin();
-    }
-  }
-
   render() {
-    console.log(this.state.userData);
     return (
       <form ref="form">
         <div className="hidden">
@@ -127,6 +125,7 @@ class Signup extends React.Component {
           <br />
           <input type="number" name="num" ref="num" placeholder="Number" />
           <br />
+
           <input type="email" name="email" ref="email" placeholder="Email" />
           <br />
           <input

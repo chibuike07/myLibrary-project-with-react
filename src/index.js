@@ -1,11 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
-// import App from './App';
-import SignInSignUp from "./Component/Register/SigInSignUp";
+import Routes from "./Component/Route";
 import * as serviceWorker from "./serviceWorker";
+// import RegisterPage from "./Component/Register/SigInSignUp";
 
-ReactDOM.render(<SignInSignUp />, document.getElementById("root"));
+ReactDOM.render(<Routes />, document.getElementById("root"));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

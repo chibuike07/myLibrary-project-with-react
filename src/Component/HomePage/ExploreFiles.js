@@ -2,7 +2,7 @@ import React from "react";
 import "./CssFile/Explore.css";
 const ExploreBooks = () => {
   return (
-    <div className="signup">
+    <div className="signups">
       <div className="sigup">
         <h3>
           <b>ready?</b> to explore in unchris library

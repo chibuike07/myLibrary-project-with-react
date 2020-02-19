@@ -14,7 +14,7 @@ const GetStarted = () => {
   );
 };
 
-class SignInSignUp extends Component {
+class RegisterPage extends Component {
   state = {
     displayForm: false,
     displaySignUpBut: true,
@@ -37,19 +37,21 @@ class SignInSignUp extends Component {
     });
   };
   handleDisplaySignInOnSignUpClick = () => {
-    this.setState({
-      displayForm: !this.state.displayForm,
-      displaySignInBut: !this.state.displaySignInBut,
-      displaySignInBut_bt: this.state.displaySignInBut_bt,
-      displaySignUpBut: this.state.displaySignUpBut
-    });
+    if (localStorage.getItem("userDatas").length + 1) {
+      this.setState({
+        displayForm: !this.state.displayForm,
+        displaySignInBut: !this.state.displaySignInBut,
+        displaySignInBut_bt: this.state.displaySignInBut_bt,
+        displaySignUpBut: this.state.displaySignUpBut
+      });
+    }
   };
   render() {
     return (
-      <>
+      <div className="contaner">
         <div className="signup">
           <GetStarted />
-          <div className="cont">
+          <div className="formCont">
             {this.state.displayForm && (
               <SignUp signin={this.handleDisplaySignInOnSignUpClick} />
             )}
@@ -60,9 +62,7 @@ class SignInSignUp extends Component {
         {this.state.displaySignInBut_bt && (
           <div className="signin">
             {/* this button have a signin id */}
-            <button onClick={this.handleSignInClick} name="signin">
-              sign in
-            </button>
+            <button onClick={this.handleSignInClick}>sign in</button>
           </div>
         )}
         {this.state.displaySignUpBut && (
@@ -73,9 +73,9 @@ class SignInSignUp extends Component {
             </button>
           </div>
         )}
-      </>
+      </div>
     );
   }
 }
 
-export default SignInSignUp;
+export default RegisterPage;

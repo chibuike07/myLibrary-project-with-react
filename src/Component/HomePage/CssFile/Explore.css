@@ -1,15 +1,7 @@
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
-html {
-  image-rendering: optimizeQuality;
-  text-rendering: optimizeLegibility;
-}
-.signup {
+.signups {
   display: flex;
   justify-content: center;
+  align-items: center;
   width: 100%;
   margin-top: 25%;
   height: 30%;
