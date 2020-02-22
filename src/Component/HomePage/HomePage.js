@@ -12,19 +12,21 @@ import "../landin-refix.css";
 class Hompage extends Component {
   render() {
     return (
-      <div className="cont">
-        <HeaderView />
-        <div className="tot-cont">
-          <OverViews />
-          <Section />
-          <Navbar />
-          <HighLights />
-          <RecentActivity />
-          <Threads />
-          <ExploreBooks />
-          <Footer />
+      <>
+        <div className="cont">
+          <HeaderView />
+          <div className="tot-cont">
+            <OverViews />
+            <Section />
+            <Navbar />
+            <HighLights />
+            <RecentActivity />
+            <Threads />
+            <ExploreBooks />
+            <Footer />
+          </div>
         </div>
-      </div>
+      </>
     );
   }
 }

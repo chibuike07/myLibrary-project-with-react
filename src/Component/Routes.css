@@ -1,0 +1,36 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+html {
+  image-rendering: optimizeQuality;
+  text-rendering: optimizeLegibility;
+}
+
+header {
+  background-color: #e3e3e9;
+  width: 100%;
+  height: 12vh;
+  z-index: 3;
+}
+header .defaultHeader {
+  display: flex;
+  justify-content: space-between;
+  padding: 2%;
+}
+.topAreas .logo img {
+  width: 50px;
+  position: relative;
+  top: -20px;
+}
+.displayed-list {
+  word-spacing: 100px;
+}
+.displayed-list a {
+  text-decoration: none;
+}
+.displayed-list a:hover {
+  border-bottom: 2px solid #493ca2;
+  padding: 10px;
+}

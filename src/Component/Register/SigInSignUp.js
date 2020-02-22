@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import SignUp from "./SignUp";
 import SignIn from "./SingIn";
 import UnichrisLogo from "../unichris logo.png";
+import Statistics from "../Statistics/Statistics";
 import "./Register_css/SignInSignUp.css";
 const GetStarted = () => {
   return (
@@ -19,7 +20,9 @@ class RegisterPage extends Component {
     displayForm: false,
     displaySignUpBut: true,
     displaySignInBut: false,
-    displaySignInBut_bt: true
+    displaySignInBut_bt: true,
+    stat: true,
+    count: 0
   };
 
   handleSignUpClick = () => {
@@ -46,7 +49,17 @@ class RegisterPage extends Component {
       });
     }
   };
+  VistedCount = () => {
+    this.setState({ count: this.state.count + 1 });
+    let seTime = setTimeout(this.VistedCount, 5000);
+    clearTimeout(seTime);
+  };
+  componentDidMount() {
+    this.VistedCount();
+  }
+
   render() {
+    console.log(this.state.count);
     return (
       <div className="contaner">
         <div className="signup">
@@ -73,6 +86,7 @@ class RegisterPage extends Component {
             </button>
           </div>
         )}
+        {this.state.stat && <Statistics count={this.state.count} />}
       </div>
     );
   }

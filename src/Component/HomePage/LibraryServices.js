@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 import InternetImg from "./Images/booksInt.jpeg";
-const Image = () => {
-  return <img src={InternetImg} alt={InternetImg} id="serv" />;
+const Image = props => {
+  return <img src={props.image} alt={props.image} id="serv" />;
 };
 class LibraryServices extends Component {
-  _Navivagions = [
+  state = {
+    image: InternetImg
+  };
+  _NavivagionFOrServices = [
     "internet computers",
     "printing",
     "printing",
@@ -12,6 +15,7 @@ class LibraryServices extends Component {
     "research computers",
     "wifi in the library of unichris"
   ];
+
   render() {
     return (
       <div className="comp">
@@ -46,7 +50,7 @@ class LibraryServices extends Component {
             </li>
           </ol>
           <br />
-          <Image />
+          <Image image={this.state.image} />
         </fieldset>
       </div>
     );

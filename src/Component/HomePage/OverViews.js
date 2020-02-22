@@ -3,21 +3,22 @@ import manager from "./Images/manager.svg";
 import chart from "./Images/chart (1).svg";
 import HelpImg from "./Images/help (1).svg";
 import logoutImg from "./Images/logout.svg";
+import { Link } from "react-router-dom";
 import "./CssFile/OverView.css";
 const Member = () => {
   return (
     <div className="mem">
-      <a href="/">
+      <Link to="/home/member">
         <img src={manager} alt={manager} />
-      </a>
+      </Link>
       <br />
-      <a href="/" id="memb">
-        <h4>member</h4>``
+      <Link to="/home/member" id="memb">
+        <h4>member</h4>
         <p>
           Lets know and take in account <br />
           our numbers
         </p>
-      </a>
+      </Link>
     </div>
   );
 };
@@ -25,9 +26,9 @@ const Member = () => {
 const Statistic = () => {
   return (
     <div className="sta">
-      <a href="/">
+      <Link to="/home/statistics">
         <img src={chart} alt={chart} />
-      </a>
+      </Link>
       <br />
       <h4>statistics</h4>
       <p>Unichris daily analysis. let know how we are growing!!!</p>
@@ -37,9 +38,9 @@ const Statistic = () => {
 const Help = () => {
   return (
     <div className="hel">
-      <a href="/" target="/">
+      <Link to="/" target="/">
         <img src={HelpImg} alt={HelpImg} />
-      </a>
+      </Link>
       <br />
       <h4>help</h4>
       <p id="help">Get assisted on unichris library services</p>
@@ -50,9 +51,9 @@ const Help = () => {
 const Log = () => {
   return (
     <div className="log">
-      <a href="/">
+      <Link to="/">
         <img src={logoutImg} alt={logoutImg} />
-      </a>
+      </Link>
       <br />
       <h4>log out</h4>
       <p>You can always sign out here! we hope you enjoy our services</p>

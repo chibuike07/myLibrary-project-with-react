@@ -1,32 +1,51 @@
 import React, { Component } from "react";
-import "../bernadin/Header.css";
-// import Logo from "./google.png";
+import { HeaderContainer } from "./Headercss";
+import { Button } from "./Button.style";
+import Logo from "./google.png";
 class Header extends Component {
   state = {
-    openMenu: true
+    toggle: true,
+    openMenu: undefined
   };
 
-  handleMenuIcon = () => {
+  handleOpenMenu = () => {
+    this.setState(prevState => ({
+      openMenu: !prevState.openMenu
+    }));
     console.log(this.state.openMenu);
   };
+  // itoggle = () => {
+  //   this.refs.navBar.style.visibility = "visible";
+  //   this.setState({ toggle: this.state.toggle });
+  // };
+
+  // itoggleAgain = () => {
+  //   this.refs.navBar.style.visibility = "hidden";
+  // };
 
   render() {
+    const { openMenu } = this.state;
+
     return (
       <>
-        <header>
+        <HeaderContainer openMenu={openMenu}>
           {/* <!-- ----------DIV 1---------------------------- --> */}
           <div className="imageMain">
-            <div className="menu_icon_div">
+            <div
+              className="menu_icon_div"
+              onClick={() => this.handleOpenMenu()}
+            >
               <div className="menu_icon"></div>
               <div className="menu_icon"></div>
               <div className="menu_icon"></div>
             </div>
             <div className="imagediv flex">
-              <img className="logo" alt="" />
+              <img className="logo" src={Logo} alt="" />
             </div>
           </div>
           {/* <!-- ----------DIV 2--------------------------------- --> */}
-          <div className="navBar " ref="navBar" onClick={this.handleMenuIcon}>
+
+          <div className="navBar " ref="navBar">
             <div className="navBarSub flex">
               <div className="header_ul">
                 <ul className="ul">
@@ -44,11 +63,11 @@ class Header extends Component {
               </div>
 
               <div>
-                <button className="header_button">Download Now</button>
+                <Button>Download Now</Button>
               </div>
             </div>
           </div>
-        </header>
+        </HeaderContainer>
       </>
     );
   }
