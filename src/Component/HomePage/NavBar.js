@@ -29,6 +29,7 @@ class NavBar extends Component {
       img: cloudImg
     }
   ];
+
   handleMouseOver = e => {
     e.preventDefault();
     for (let values in this.NavigationArray) {
@@ -46,10 +47,11 @@ class NavBar extends Component {
       <div className="nav">
         <div className="nav-link" id="nav-link">
           <Link
-            to="/"
+            to="/community"
             id="join"
             onMouseOver={this.handleMouseOver}
             onMouseLeave={this.handleMouseout}
+            onClick={this.handleClick}
           >
             join the library community
           </Link>

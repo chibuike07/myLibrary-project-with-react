@@ -1,0 +1,53 @@
+.gif {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  background: linear-gradient(
+      to bottom,
+      rgba(165, 23, 221, 0.7),
+      rgba(89, 18, 170, 0.7)
+    ),
+    url("../Library_Images/tenor (1).gif");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-blend-mode: hard-light;
+  /* height: 100vh; */
+}
+.gif form {
+  width: 30%;
+  position: absolute;
+  top: 175vh;
+  /* transform: translate(-80%,-20%); */
+}
+.gif form input[type="text"] {
+  height: 5vh;
+  outline: none;
+}
+.gif form input[type="submit"] {
+  margin-top: 2%;
+  height: 7vh;
+  border-radius: 20px;
+  background-color: #493ca2;
+  color: #fff;
+  outline: none;
+  box-shadow: 3px 5px #8170f0;
+}
+.lin {
+  /* height: 10vh; */
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  line-height: 4;
+  top: 210vh;
+  width: 30%;
+}
+.lin a {
+  color: #fff;
+  text-decoration: none;
+}
+.lin a:hover {
+  border-bottom: 2px solid #493ca2;
+  padding: 10px;
+}

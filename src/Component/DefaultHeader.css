@@ -9,28 +9,28 @@ html {
 }
 
 header {
+  position: absolute;
   background-color: #e3e3e9;
   width: 100%;
   height: 12vh;
   z-index: 3;
 }
-header .defaultHeader {
+header .headTop {
   display: flex;
   justify-content: space-between;
   padding: 2%;
+  z-index: 3;
 }
-.topAreas .logo img {
+.logo img {
   width: 50px;
   position: relative;
   top: -20px;
 }
-.displayed-list {
-  word-spacing: 100px;
-}
 .displayed-list a {
   text-decoration: none;
+  margin-right: 50%;
 }
 .displayed-list a:hover {
   border-bottom: 2px solid #493ca2;
-  padding: 10px;
+  padding-bottom: 10px;
 }

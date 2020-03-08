@@ -36,6 +36,10 @@
   color: #fff;
   text-transform: capitalize;
 }
+.signup .get-started h2 {
+  color: #fff;
+}
+
 .signup .get-started .landin-log {
   border-radius: 50%;
   width: 50%;

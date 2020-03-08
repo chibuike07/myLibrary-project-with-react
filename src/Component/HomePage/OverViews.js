@@ -1,18 +1,33 @@
-import React, { Component } from "react";
+import React, { Component, useState, useEffect } from "react";
 import manager from "./Images/manager.svg";
 import chart from "./Images/chart (1).svg";
 import HelpImg from "./Images/help (1).svg";
 import logoutImg from "./Images/logout.svg";
 import { Link } from "react-router-dom";
 import "./CssFile/OverView.css";
-const Member = () => {
+const Member = props => {
+  const [fullName, setFullName] = useState(null);
+
+  const ReturnNames = () => {
+    let [...names] = props.member;
+    for (let name of names) {
+      let nameData = `${name.fname} ${name.lname}`;
+      console.log(nameData);
+      setFullName(nameData);
+      // return nameData;
+    }
+  };
+  useEffect(() => {
+    ReturnNames();
+  });
+
   return (
     <div className="mem">
-      <Link to="/home/member">
+      <Link to={"/home/" + fullName}>
         <img src={manager} alt={manager} />
       </Link>
       <br />
-      <Link to="/home/member" id="memb">
+      <Link to={"/home/" + fullName} id="memb">
         <h4>member</h4>
         <p>
           Lets know and take in account <br />
@@ -65,7 +80,7 @@ class OverViews extends Component {
     return (
       <div className="clue">
         <div className="top-List">
-          <Member />
+          <Member member={this.props.members} />
           <Statistic />
           <Help />
           <Log />

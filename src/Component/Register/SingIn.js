@@ -28,6 +28,7 @@ class SignIn extends React.Component {
       return user.email.includes(email) && user.pwrd.includes(password);
     });
     // console.log(userObjects);
+
     if (userObjects === "" || userObjects == false) {
       alert("Email or Password incorrect");
       return;
@@ -39,7 +40,8 @@ class SignIn extends React.Component {
         }
       }
       console.log(userNames);
-      window.location.replace("/home?userName=" + userNames);
+      localStorage.setItem("loggerName", JSON.stringify(userNames));
+      window.location.replace("/home");
       //location.href = "link.html?userNames=" + userNames;
     }
   };

@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import SignUp from "./SignUp";
 import SignIn from "./SingIn";
 import UnichrisLogo from "../unichris logo.png";
-import Statistics from "../Statistics/Statistics";
 import "./Register_css/SignInSignUp.css";
 const GetStarted = () => {
   return (
@@ -86,7 +85,6 @@ class RegisterPage extends Component {
             </button>
           </div>
         )}
-        {this.state.stat && <Statistics count={this.state.count} />}
       </div>
     );
   }
