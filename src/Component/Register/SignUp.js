@@ -1,85 +1,107 @@
 import React from "react";
-import "./Register_css/SignUp.css";
-
+import SignUpStyles from "./Register_css/SignUp.module.css";
+import Button from "../Reuseable.component/Button.component/Button";
+import Input from "../Reuseable.component/Input.component/Input";
+const { input, button } = SignUpStyles; //destructured styles from the style.module
 class Signup extends React.Component {
+  //function for SignUp users
   state = {
+    //setting the initial values to the state
     img: [],
     borrowedBooks: [],
     reserveBook: [],
-    id: []
+    id: [],
+    fname: "",
+    lname: "",
+    gender: "",
+    dsp: "",
+    num: "",
+    email: "",
+    pwrd: "",
+    datas: [] //inputs values wrapper
   };
-
   isNumeric = n => {
+    //function that checks for numbers
     return !isNaN(parseFloat(n)) && isFinite(n);
   };
 
+  handleChange = ({ target }) => {
+    //function to handle input value onchange
+    this.setState(prev => ({
+      ...prev,
+      [target.name]: target.value
+    }));
+  };
   handleUSerSigUp = e => {
-    let array = [];
     e.preventDefault();
-    let fname = this.refs.fname.value;
-    let lname = this.refs.lname.value;
-    let gender = this.refs.gender.value;
-    let dsp = this.refs.dsp.value;
-    let num = this.refs.num.value;
-    let email = this.refs.email.value;
-    let pwrd = this.refs.pwrd.value;
+    //declaring and assigning of variable
+    let fname = this.state.fname;
+    let lname = this.state.lname;
+    let gender = this.state.gender;
+    let dsp = this.state.dsp;
+    let num = this.state.num;
+    let email = this.state.email;
+    let pwrd = this.state.pwrd;
     let img = this.state.img;
     let borrowedBooks = this.state.borrowedBooks;
     let reserveBook = this.state.reserveBook;
     let id = this.state.id;
+
+    //conditionion the input value datas
     if (fname === "") {
       alert("First name must not be left empty");
-      this.refs.fname.focus();
-      return false;
+      this.refs.inputs.firstChild.parentNode.children.fname.focus();
+      // return false;
     } else if (this.isNumeric(fname)) {
       alert("Number is not an option");
-      this.refs.fname.focus();
+      this.refs.inputs.firstChild.parentNode.children.fname.focus();
       return false;
     } else if (this.isNumeric(lname)) {
       alert("Number is not an option");
-      this.refs.lname.focus();
+      this.refs.inputs.firstChild.parentNode.children.lname.focus();
       return false;
     } else if (lname === "") {
       alert("Last name must not be left empty");
-      this.refs.lname.focus();
+      this.refs.inputs.firstChild.parentNode.children.lname.focus();
       return false;
     } else if (gender === "") {
       alert("Gender must not be left empty");
-      this.refs.gender.focus();
+      this.refs.inputs.firstChild.parentNode.children.gender.focus();
       return false;
     } else if (this.isNumeric(gender)) {
       alert("Number is not an option");
-      this.refs.gender.focus();
+      this.refs.inputs.firstChild.parentNode.children.gender.focus();
       return false;
     } else if (dsp === "") {
       alert("Displine  must not be left empty");
-      this.refs.dsp.focus();
+      this.refs.inputs.firstChild.parentNode.children.dsp.focus();
       return false;
     } else if (this.isNumeric(dsp)) {
       alert("Numbers is not an option");
-      this.refs.dsp.focus();
+      this.refs.inputs.firstChild.parentNode.children.dsp.focus();
       return false;
     } else if (num === "") {
       alert("Number must not be left empty");
-      this.refs.num.focus();
+      this.refs.inputs.firstChild.parentNode.children.num.focus();
       return false;
     } else if (email === "") {
       alert("Email must not be left empty");
-      this.refs.email.focus();
+      this.refs.inputs.firstChild.parentNode.children.email.focus();
       return false;
-    } else if (!email.includes("@")) {
-      alert("input a valid email");
-      this.refs.email.focus();
-      return false;
+    } else if (!email.includes("@" && ".")) {
+      alert(`@ or . missing`);
+      this.refs.inputs.firstChild.parentNode.children.email.focus();
+      return;
     } else if (pwrd === "") {
       alert("Password must not be left empty");
-      this.refs.pwrd.focus();
+      this.refs.inputs.firstChild.parentNode.children.pwrd.focus();
       return false;
     } else if (pwrd.length < 8) {
       alert("Password must not be less 8 characters");
-      this.refs.pwrd.focus();
+      this.refs.inputs.firstChild.parentNode.children.pwrd.focus();
       return false;
     }
+    //adding the userInformations to an object
     let userObject = {
       fname,
       lname,
@@ -93,51 +115,100 @@ class Signup extends React.Component {
       reserveBook,
       id
     };
-    if (localStorage.getItem("userDatas") === null) {
-      array.push(userObject);
-      localStorage.setItem("userDatas", JSON.stringify(array));
-    } else {
-      let array = JSON.parse(localStorage.getItem("userDatas"));
-      array.push(userObject);
-      localStorage.setItem("userDatas", JSON.stringify(array));
-    }
-
-    this.props.signin();
-    this.refs.form.reset();
+    this.setState(prev => ({ datas: [...prev.datas, userObject] })); //setting the userInformation datas to the state
+    this.refs.form.reset(); //reset form on submit
   };
-
+  //setting the user datas to local storage on componentdidupdate and route to the sign in page
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.datas.length !== this.state.datas.length) {
+      if (localStorage.getItem("userDatas") === null) {
+        localStorage.setItem("userDatas", JSON.stringify(this.state.datas));
+      } else {
+        let storageData = JSON.parse(localStorage.getItem("userDatas"));
+        for (let userObject of this.state.datas) {
+          storageData.push(userObject);
+        }
+        localStorage.setItem("userDatas", JSON.stringify(storageData));
+      }
+      this.props.signin(); //routing to signin page on componentdid update
+    }
+  }
   render() {
     return (
-      <form ref="form">
-        <div className="hidden">
-          <input
-            type="text"
-            name="fname"
-            ref="fname"
-            placeholder="First name"
+      <form ref="form" onSubmit={this.handleUSerSigUp}>
+        <div ref="inputs">
+          <Input
+            type={"text"}
+            name={"fname"}
+            placeholder={"First name"}
+            className={input}
+            onChange={this.handleChange}
+            value={this.state.fname}
+            isRequired={true}
           />
           <br />
-          <input type="text" name="lname" ref="lname" placeholder="Last name" />
+          <Input
+            type={"text"}
+            name={"lname"}
+            placeholder={"Last name"}
+            className={input}
+            value={this.state.lname}
+            onChange={this.handleChange}
+            isRequired={true}
+          />
           <br />
-          <input type="text" name="gender" ref="gender" placeholder="Gender" />
+          <Input
+            type={"text"}
+            name={"gender"}
+            placeholder={"Gender"}
+            className={input}
+            value={this.state.gender}
+            onChange={this.handleChange}
+            isRequired={true}
+          />
           <br />
-          <input type="text" name="dsp" ref="dsp" placeholder="Displine" />
+          <Input
+            type={"text"}
+            name={"dsp"}
+            placeholder={"Displine"}
+            className={input}
+            value={this.state.dsp}
+            onChange={this.handleChange}
+            isRequired={true}
+          />
           <br />
-          <input type="number" name="num" ref="num" placeholder="Number" />
+          <Input
+            type={"number"}
+            name={"num"}
+            placeholder={"Number"}
+            className={input}
+            value={this.state.num}
+            onChange={this.handleChange}
+            isRequired={true}
+          />
           <br />
 
-          <input type="email" name="email" ref="email" placeholder="Email" />
+          <Input
+            type={"email"}
+            name={"email"}
+            placeholder={"Email"}
+            className={input}
+            value={this.state.email}
+            onChange={this.handleChange}
+            isRequired={true}
+          />
           <br />
-          <input
-            type="password"
-            name="pwrd"
-            ref="pwrd"
-            placeholder="Password"
+          <Input
+            type={"password"}
+            name={"pwrd"}
+            placeholder={"Password"}
+            className={input}
+            value={this.state.pwrd}
+            onChange={this.handleChange}
+            isRequired={true}
           />
         </div>
-        <button onClick={this.handleUSerSigUp} name="signup">
-          Register
-        </button>
+        <Button text={"Register"} name={"signup"} className={button} />
       </form>
     );
   }

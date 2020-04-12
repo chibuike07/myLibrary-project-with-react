@@ -1,0 +1,30 @@
+.input[type="email"],
+.input[type="password"],
+.input[type="text"],
+.input[type="number"] {
+  /* font-family: "Patrick Hand SC", cursive; */
+  width: 80%;
+  height: 3em;
+  border-radius: 20px;
+  padding-left: 3px;
+  outline: 0;
+  border: none;
+  border-bottom: 2px solid #494ca2;
+  background-color: transparent;
+  font-size: 20px;
+  color: #000;
+}
+.button[name="signup"] {
+  position: absolute;
+  top: 29em;
+  right: 10%;
+  width: 9.5em;
+  height: 5.3vh;
+  background: linear-gradient(#494ca2, #8186d5);
+  color: #fff;
+  outline: none;
+  border-style: none;
+  font-family: "Patrick Hand SC", cursive;
+  font-size: larger;
+  border-radius: 12px;
+}

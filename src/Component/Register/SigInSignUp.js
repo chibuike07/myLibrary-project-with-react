@@ -2,11 +2,21 @@ import React, { Component } from "react";
 import SignUp from "./SignUp";
 import SignIn from "./SingIn";
 import UnichrisLogo from "../unichris logo.png";
-import "./Register_css/SignInSignUp.css";
+import Button from "../Reuseable.component/Button.component/Button";
+import SignInSignUpStyles from "./Register_css/SignInSignUp.module.css";
+const {
+  container,
+  signup,
+  get_started,
+  landin_log,
+  formCont,
+  signin,
+  reg
+} = SignInSignUpStyles;
 const GetStarted = () => {
   return (
-    <div className="get-started">
-      <img src={UnichrisLogo} alt={UnichrisLogo} className="landin-log" />
+    <div className={get_started}>
+      <img src={UnichrisLogo} alt={UnichrisLogo} className={landin_log} />
       <br />
       <h2>welcome to christopher university</h2>
       <p>where excellence and education is at its peak</p>
@@ -60,10 +70,10 @@ class RegisterPage extends Component {
   render() {
     console.log(this.state.count);
     return (
-      <div className="contaner">
-        <div className="signup">
+      <div className={container}>
+        <div className={signup}>
           <GetStarted />
-          <div className="formCont">
+          <div className={formCont}>
             {this.state.displayForm && (
               <SignUp signin={this.handleDisplaySignInOnSignUpClick} />
             )}
@@ -72,17 +82,19 @@ class RegisterPage extends Component {
         </div>
 
         {this.state.displaySignInBut_bt && (
-          <div className="signin">
+          <div className={signin}>
             {/* this button have a signin id */}
-            <button onClick={this.handleSignInClick}>sign in</button>
+            <Button click={this.handleSignInClick} text={"sign in"} />
           </div>
         )}
         {this.state.displaySignUpBut && (
           <div className="regBut">
             {/* have an id of reg */}
-            <button onClick={this.handleSignUpClick} className="reg">
-              sign up
-            </button>
+            <Button
+              text={"sign up"}
+              click={this.handleSignUpClick}
+              className={reg}
+            />
           </div>
         )}
       </div>
