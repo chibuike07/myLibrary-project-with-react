@@ -15,7 +15,9 @@ const Image = ({
   transform,
   margin,
   padding,
-  zIndex
+  zIndex,
+  id,
+  type
 }) => {
   const { custom_image, custom_image_wrapper } = ImageStyles;
   return (
@@ -38,6 +40,8 @@ const Image = ({
         alt={alt}
         className={className ? className : custom_image}
         onClick={onclick ? onclick : null}
+        id={id ? id : null}
+        type={type ? type : null}
       />
     </div>
   );

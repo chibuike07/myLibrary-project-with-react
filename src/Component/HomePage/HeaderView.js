@@ -1,17 +1,17 @@
 import React from "react";
-import "./CssFile/HeaderView.css";
+import HeaderViewStyles from "./CssFile/HeaderView.module.css";
+import CustomLink from "../Reuseable.component/Link.component//Link";
 const HeaderView = () => {
+  const { header_wrapper, school_nickname } = HeaderViewStyles;
   return (
-    <div className="sch">
+    <div className={header_wrapper}>
       <h1>
         christopher <br />
         university
       </h1>
       <br />
-      <div className="rec">
-        <a href="/" id="rc">
-          unichris
-        </a>
+      <div className={school_nickname}>
+        <CustomLink url={"/"} id={"rc"} text={"unichris"} />
       </div>
     </div>
   );

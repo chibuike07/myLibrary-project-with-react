@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import QuoteImg from "./Images/quote.png";
 import PatronFace from "./Images/replace.svg";
-import "./CssFile/Threads.css";
-const Testimony = () => {
+import ThreadStyles from "./CssFile/Threads.module.css";
+import CustomLink from "../Reuseable.component/Link.component/Link";
+import CustomImage from "../Reuseable.component/Image.component/Image";
+const Testimony = ({ style, childStyle }) => {
   return (
-    <div className="hap-c">
-      <div className="hap">
-        <a href="/">TESTIMONIAL</a>
+    <div className={style}>
+      <div className={childStyle}>
+        <CustomLink url={"/"} text={"TESTIMONIAL"} color={"#493ca2"} />
         <h3>Our happy patrons</h3>
         <p>view and join in people testimony</p>
         <p>Let other learn from your testimony</p>
@@ -15,15 +17,18 @@ const Testimony = () => {
   );
 };
 
-const Image = () => {
-  return <img src={PatronFace} id="img-m" alt={PatronFace} />;
-};
-const PatronsRecentBookSummary = () => {
+const PatronsRecentBookSummary = ({ style, childStyle }) => {
   return (
-    <div className="mom">
-      <fieldset className="mom-bord">
+    <div className={style}>
+      <fieldset className={childStyle}>
         <legend>
-          <img src={QuoteImg} alt={QuoteImg} />
+          <CustomImage
+            src={QuoteImg}
+            alt={QuoteImg}
+            position={"relative"}
+            left={"80%"}
+            top={"1%"}
+          />
         </legend>
         <p>
           you can do it! bit it! change people expression. that your problem is
@@ -31,16 +36,37 @@ const PatronsRecentBookSummary = () => {
           own testimony stay toned! stay focus!! access remotely.
         </p>
       </fieldset>
-      <Image />
+      <CustomImage
+        src={PatronFace}
+        id={"img-m"}
+        alt={PatronFace}
+        position={"relative"}
+        left={"50%"}
+        top={"8px"}
+        type={"button"}
+      />
     </div>
   );
 };
 class Thread extends Component {
   render() {
+    const {
+      thread_wrapper,
+      testimony_wrapper,
+      testimony_hint_container,
+      patrons_view_wrapper,
+      patrons_field_set
+    } = ThreadStyles;
     return (
-      <div className="cust">
-        <Testimony />
-        <PatronsRecentBookSummary />
+      <div className={thread_wrapper}>
+        <Testimony
+          style={testimony_wrapper}
+          childStyle={testimony_hint_container}
+        />
+        <PatronsRecentBookSummary
+          style={patrons_view_wrapper}
+          childStyle={patrons_field_set}
+        />
       </div>
     );
   }

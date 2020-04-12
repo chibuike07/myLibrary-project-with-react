@@ -37,10 +37,10 @@ const DefaultHeader = () => {
   useEffect(() => {
     weekDay();
     userNameData();
-  });
-  useEffect(() => {
     times();
   });
+  // useEffect(() => {
+  // }, []);
   return (
     <header>
       <div className="headTop">
@@ -52,11 +52,9 @@ const DefaultHeader = () => {
           <h5 id="time">{time}</h5>
         </div>
         <div className="displayed-list">
-          <Link to="/" target="">
-            home
-          </Link>
-          <Link to="/">services</Link>
-          <Link to="/">demo</Link>
+          <Link to="/home">home</Link>
+          <Link to="/service">services</Link>
+          <Link to="/demo">demo</Link>
         </div>
         <div className="personDetail">
           {/* <img src="" alt="" /> */}

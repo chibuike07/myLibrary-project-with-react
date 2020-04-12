@@ -12,7 +12,7 @@ const SearchForm = () => {
             id="search"
             className="search-field"
             placeholder="Search"
-            value=""
+            // value=""
             name="s"
           />
         </label>

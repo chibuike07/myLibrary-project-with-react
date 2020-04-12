@@ -1,13 +1,14 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import NetworkImg from "./Images/network.svg";
 import bookImg from "./Images/books.svg";
 import cloudImg from "./Images/cloud.svg";
-import "./CssFile/NavBar.css";
-const Image = props => {
+import NavBarStyle from "./CssFile/NavBar.module.css";
+import CustomImage from "../Reuseable.component/Image.component/Image";
+import CustomLink from "../Reuseable.component/Link.component/Link";
+const Image = ({ image, style }) => {
   return (
-    <div className="nav-img">
-      <img src={props.image} alt={props.image} id="img" />
+    <div className={style}>
+      <CustomImage src={image} alt={image} id={"img"} />
     </div>
   );
 };
@@ -33,7 +34,7 @@ class NavBar extends Component {
   handleMouseOver = e => {
     e.preventDefault();
     for (let values in this.NavigationArray) {
-      if (e.target.innerText === this.NavigationArray[values].text) {
+      if (e.target.text === this.NavigationArray[values].text) {
         this.setState({ image: this.NavigationArray[values].img });
       }
     }
@@ -43,37 +44,24 @@ class NavBar extends Component {
     this.setState({ image: NetworkImg });
   };
   render() {
+    const { nav, nav_link, nav_img } = NavBarStyle;
     return (
-      <div className="nav">
-        <div className="nav-link" id="nav-link">
-          <Link
-            to="/community"
-            id="join"
-            onMouseOver={this.handleMouseOver}
-            onMouseLeave={this.handleMouseout}
-            onClick={this.handleClick}
-          >
-            join the library community
-          </Link>
-          <Link
-            to="/"
-            id="ren"
-            onMouseOver={this.handleMouseOver}
-            onMouseLeave={this.handleMouseout}
-          >
-            renew or reserve book
-          </Link>
-          {/* href to unichris library */}
-          <Link
-            to="/"
-            id="onl"
-            onMouseOver={this.handleMouseOver}
-            onMouseLeave={this.handleMouseout}
-          >
-            online catalogue
-          </Link>
+      <div className={nav}>
+        <div className={nav_link} id={"nav-link"}>
+          {this.NavigationArray.map(({ text }, i) => (
+            <CustomLink
+              key={i}
+              text={text}
+              url={"/" + text}
+              id={"join"}
+              onMouseOver={this.handleMouseOver}
+              onMouseLeave={this.handleMouseout}
+              click={this.handleClick}
+              color={"#000"}
+            />
+          ))}
         </div>
-        <Image image={this.state.image} />
+        <Image image={this.state.image} style={nav_img} />
       </div>
     );
   }

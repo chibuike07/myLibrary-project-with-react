@@ -3,31 +3,42 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  margin-top: 25%;
-  height: 30%;
+  height: 200px;
   position: absolute;
-  top: 470%;
+  top: 195em;
 }
-.sigup {
-  height: 60vh;
+.signup {
+  height: inherit;
   display: flex;
   align-items: center;
   justify-content: space-around;
   width: 50%;
   background-color: #fff;
-  height: 100%;
   filter: drop-shadow(3px 10px #cabee0);
   outline: none;
 }
-.sigup b {
+.signup b {
   color: #493ca2;
 }
-.sigup button {
-  width: 17%;
+.signup button {
+  width: 20vw;
   height: 6vh;
   background-color: #493ca2;
   color: #fff;
   border-radius: 20px;
   box-shadow: 3px 10px #cabee0;
   outline: none;
+  text-transform: uppercase;
+}
+
+.signup button:active {
+  animation: splash 2s infinite;
+}
+@keyframes splash {
+  from {
+    background-color: red;
+  }
+  to {
+    background-color: #493ca2;
+  }
 }

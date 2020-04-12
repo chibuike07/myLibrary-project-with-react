@@ -15,12 +15,16 @@ const Links = ({
   backgroundColor,
   margin,
   click,
+  onMouseOver,
+  onMouseLeave,
   id
 }) => (
   <Link
     to={url}
     className={className}
     onClick={click ? click : null}
+    onMouseOver={onMouseOver ? onMouseOver : null}
+    onMouseLeave={onMouseLeave ? onMouseLeave : null}
     id={id ? id : null}
     style={{
       textDecoration: textDecoration ? textDecoration : "none",

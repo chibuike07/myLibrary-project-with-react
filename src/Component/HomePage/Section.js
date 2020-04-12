@@ -1,16 +1,17 @@
 import React from "react";
-import "./CssFile/Section.css";
+import SectionStyle from "./CssFile/Section.module.css";
 import LibraryImage from "./Images/white4.jpg";
-const Image = () => {
+import CustomImage from "../Reuseable.component/Image.component/Image";
+const Image = ({ style }) => {
   return (
-    <div className="ab-img">
-      <img src={LibraryImage} alt={LibraryImage} />
+    <div className={style}>
+      <CustomImage src={LibraryImage} alt={LibraryImage} />
     </div>
   );
 };
-const Text = () => {
+const Text = ({ style }) => {
   return (
-    <div className="abt-tex">
+    <div className={style}>
       <h1>about us</h1>
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis velit
@@ -36,10 +37,11 @@ const Text = () => {
 };
 
 const Section = () => {
+  const { about, about_text, about_img } = SectionStyle;
   return (
-    <div className="about">
-      <Image />
-      <Text />
+    <div className={about}>
+      <Image style={about_img} />
+      <Text style={about_text} />
     </div>
   );
 };

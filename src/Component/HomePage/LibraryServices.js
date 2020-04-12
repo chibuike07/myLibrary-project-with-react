@@ -1,56 +1,51 @@
 import React, { Component } from "react";
 import InternetImg from "./Images/booksInt.jpeg";
-const Image = props => {
-  return <img src={props.image} alt={props.image} id="serv" />;
+import LibraryServiceStyle from "./CssFile/LibraryService.module.css";
+import CustomLink from "../Reuseable.component/Link.component/Link.jsx";
+import CustomList from "../Reuseable.component/List.component/List";
+import CustomImage from "../Reuseable.component/Image.component/Image";
+const Image = ({ image, style }) => {
+  return (
+    <div className={LibraryServiceStyle.image_wrapper}>
+      <CustomImage src={image} alt={image} id={"serv"} className={style} />
+    </div>
+  );
 };
 class LibraryServices extends Component {
   state = {
     image: InternetImg
   };
-  _NavivagionFOrServices = [
+  _NavigationForServices = [
     "internet computers",
-    "printing",
     "printing",
     "scanning",
     "research computers",
     "wifi in the library of unichris"
   ];
-
   render() {
+    const { comp, fieldset, list, serv } = LibraryServiceStyle;
     return (
-      <div className="comp">
-        <h2 href="/">Make use of christopher library services</h2>
+      <div className={comp}>
+        <h2>Make use of christopher library services</h2>
         <br />
-        <fieldset>
+        <fieldset className={fieldset}>
           <ol id="set">
-            <li>
-              <a href="/" id="int">
-                internet computers
-              </a>
-            </li>
-            <li>
-              <a href="/" id="pri">
-                printing
-              </a>
-            </li>
-            <li>
-              <a href="/" id="sca">
-                scanning
-              </a>
-            </li>
-            <li>
-              <a href="/" id="res">
-                research computers
-              </a>
-            </li>
-            <li>
-              <a href="/" id="wi-fi">
-                wifi in the library of unichris
-              </a>
-            </li>
+            {this._NavigationForServices.map((services, i) => (
+              <CustomList
+                key={i}
+                text={
+                  <CustomLink
+                    text={services}
+                    url={"/"}
+                    color={"#000"}
+                    className={list}
+                  />
+                }
+              />
+            ))}
           </ol>
           <br />
-          <Image image={this.state.image} />
+          <Image image={this.state.image} style={serv} />
         </fieldset>
       </div>
     );

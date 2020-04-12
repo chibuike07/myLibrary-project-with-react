@@ -16,25 +16,26 @@
   text-decoration: none;
   padding-left: 2%;
 }
-.nav-link {
+.nav_link {
   display: flex;
   flex-direction: column;
   width: 30%;
   padding: 2%;
   line-height: 5;
-  margin-top: 7%;
 }
-.nav-link :hover {
+.nav_link a:hover {
   border-bottom: 2px double #493ca2;
 }
 
-.nav-img {
+.nav_img {
   padding-right: 2%;
   width: 70%;
   display: flex;
   justify-content: flex-end;
+  align-items: center;
 }
-.nav-img img {
-  width: 50%;
+.nav_img img {
+  width: 50vw;
+  height: 20em;
   padding-right: 3%;
 }

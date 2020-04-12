@@ -21,7 +21,6 @@ class Hompage extends Component {
   }
 
   render() {
-    console.log(this.state.member);
     return (
       <>
         <DefaultHeader />

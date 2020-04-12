@@ -14,63 +14,59 @@
   padding-left: 3%;
 }
 
-.mem {
+.member {
   background: linear-gradient(#7a02ca, #370594);
-  width: 35%;
+  width: 700px;
+
   height: 25vh;
-  display: flex;
-  flex-direction: column;
   margin-right: 4%;
   filter: drop-shadow(0px 10px #cabee0);
   outline: none;
+  overflow: hidden;
 }
 
-.sta {
-  background-color: #fff;
-  color: #494ca2;
-  width: 35%;
+.statistics {
+  width: 700px;
   height: 25vh;
-  display: flex;
-  flex-direction: column;
+  background-color: #fff;
   margin-right: 4%;
   filter: drop-shadow(0px 10px #cabee0);
   outline: none;
+  overflow: hidden;
 }
-.hel {
-  background-color: #fff;
-  color: #494ca2;
-  width: 35%;
+.help {
+  width: 700px;
   height: 25vh;
-  display: flex;
-  flex-direction: column;
+  background-color: #fff;
+  color: "#494ca2";
   margin-right: 4%;
   filter: drop-shadow(0px 10px #cabee0);
   outline: none;
+  overflow: hidden;
 }
 .log {
-  background-color: #fff;
-  color: #494ca2;
-  width: 35%;
+  width: 700px;
   height: 25vh;
-  display: flex;
-  flex-direction: column;
+  background-color: #fff;
+  margin-right: 4%;
   filter: drop-shadow(0px 10px #cabee0);
   outline: none;
+  overflow: hidden;
 }
-.top-List {
+.top_List {
   display: flex;
   justify-content: space-around;
   color: #fff;
   width: 50%;
 }
-.top-List img {
+.top_List img {
   display: flex;
   flex-direction: column;
   width: 20px;
   padding-top: 4%;
   padding-left: 3%;
 }
-.top-List a {
+.top_List a {
   color: #fff;
   text-decoration: none;
 }

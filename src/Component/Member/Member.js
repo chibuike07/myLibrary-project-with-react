@@ -10,13 +10,13 @@ const MembersPage = props => {
     for (let values of userData) {
       if (values.fname + " " + values.lname.includes(members)) {
         console.log(values);
-        setMember(values);
+        setMember(values.fname);
       }
     }
   };
   useEffect(() => {
     fetchStorageDatas();
-  }, []);
+  });
   console.log(member);
   return (
     <div>

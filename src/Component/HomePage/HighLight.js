@@ -1,6 +1,6 @@
 import React from "react";
 import LibraryServices from "./LibraryServices";
-import "./CssFile/HighLight.css";
+import HighLightStyles from "./CssFile/HighLight.module.css";
 const Text = () => {
   return (
     <div>
@@ -24,12 +24,12 @@ const Text = () => {
   );
 };
 const HighLights = () => {
+  const { research } = HighLightStyles;
+
   return (
-    <div className="research">
+    <div className={research}>
       <div>
-        <h2 href="/">
-          Study and research at the library of christopher university
-        </h2>
+        <h2>Study and research at the library of christopher university</h2>
         <br />
         <Text /> <br />
         <br />
