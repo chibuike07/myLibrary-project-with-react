@@ -1,53 +1,72 @@
 import React from "react";
-import "./LibraryCss _folder/Content.css";
+import ContentStyles from "./LibraryCss _folder/Content.module.css";
+import CustomList from "../Reuseable.component/List.component/List";
 const Content = () => {
+  const LibDepartments = [
+    "Office Of The Librarian",
+    "Technical Service Department",
+    "Users Service Department",
+    "E-Library Department"
+  ];
+
+  const { content } = ContentStyles;
   return (
     <>
-      <div className="content">
+      <div className={content}>
         <p>
           Unichris library is a library that hold collection of fiction and
           non-fiction book. As we all known is situated in the four walls of an
           instituation, so therefore is said to be academics library. <br />
-          books here varies from department to faculty courses done by the
+          <br />
+          Books here varies from department to faculty courses done by the
           school i.e social social sciences , business administration and school
           of humanities <br />
+          <br />
           The library is fully stocked with serials, journals, periodicals,
           encyclopedia, research books and reference books , for students,
-          staffs , community and <br />
-          researchers of knowledge.
+          staffs , community and researchers of knowledge.
         </p>
+        <br /> <br />
         <p>
           The library is made up of different department that is further divided
           into sections to suit the user quest and for easy accessibity of the
-          collection <br />
-          by the patrons ; the department are listed below:
+          collection by the patrons ; the department are listed below:
         </p>
+        <br />
+        <br />
         <ul>
-          <li>Office Of The Librarian</li>
-          <li>Technical Service Department</li>
-          <li>Users Service Department</li>
-          <li>E-Library Department</li>
+          {LibDepartments
+            ? LibDepartments.map((department, i) => (
+                <CustomList text={department} key={i} />
+              ))
+            : "library department still loading"}
         </ul>
+        <br />
         <h4>Office Of The Librarian</h4>
+        <br />
         <p>
           This is the department that carter for all the affairs of the library
           from funding to acquisations of library collection and the structures
         </p>
+        <br />
         <h4>Technical Service Department</h4>
+        <br />
         <p>
           This is where acquisation of books, given of accession number,call
           number, classification and cataloguing of books collections are been
           done
         </p>
-
+        <br />
         <h4>Users Service Department</h4>
+        <br />
         <p>
           This is where borrowing and lending of books , user place of reading ,
           and all the <br />
           collections are made available for our patrons here
         </p>
-
+        <br />
         <h4>E-Library Department</h4>
+        <br />
         <p>
           This is a department where information are accessed online and also it
           holds the <br />

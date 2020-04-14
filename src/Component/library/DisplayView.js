@@ -1,25 +1,11 @@
 import React, { useState } from "react";
 import elibraryImg from "./Library_Images/e-lib.jpeg";
-import "./LibraryCss _folder/displayView.css";
+import DisplayViewStyles from "./LibraryCss _folder/displayView.module.css";
 import secImage from "./Library_Images/e-lib4-reduce.jpg";
 import thirdImage from "./Library_Images/e-lib1.jpeg";
-const SerVices = () => {
-  return (
-    <div className="cover">
-      <div className="cat-class">
-        <a href="/" className="cat-class-btn join">
-          library services
-        </a>
-        <a href="lending.html" className="cat-class-btn ren">
-          record collections
-        </a>
-        <a href="/" className="cat-class-btn cat">
-          online catalog
-        </a>
-      </div>
-    </div>
-  );
-};
+import CustomLink from "../Reuseable.component/Link.component/Link";
+import CustomButton from "../Reuseable.component/Button.component/Button";
+import CustomImage from "../Reuseable.component/Image.component/Image";
 const h4Arr = [
   "nelson mandela interactive innovation exhibition",
   "place your book order",
@@ -32,6 +18,40 @@ const pArr = [
 ];
 let len = 0;
 const array = [elibraryImg, secImage, thirdImage];
+
+const SerVices = ({
+  cover,
+  categories_class,
+  categories_class_btn,
+  join,
+  ren,
+  cat
+}) => {
+  return (
+    <div className={cover}>
+      <div className={categories_class}>
+        <CustomLink
+          url="/"
+          text={"library services"}
+          className={`${categories_class_btn} ${join}`}
+          color={"#493ca2"}
+        />
+        <CustomLink
+          url={"lending.html"}
+          className={`${categories_class_btn} ${ren}`}
+          text={"record collections"}
+        />
+        <CustomLink
+          url={"/"}
+          className={`${categories_class_btn} ${cat}`}
+          text={"online catalog"}
+          color={"#493ca2"}
+        />
+      </div>
+    </div>
+  );
+};
+
 const DisplayView = () => {
   const [image, setImage] = useState(elibraryImg);
   const [headings, setHeadings] = useState(
@@ -63,28 +83,50 @@ const DisplayView = () => {
       }
     }
   };
+  const {
+    library_views,
+    button_click,
+    high_light,
+    cover,
+    categories_class,
+    categories_class_btn,
+    join,
+    ren,
+    cat
+  } = DisplayViewStyles;
   return (
     <>
-      <div className="library-views">
-        <div className="nav-click">
-          <button onClick={handleNext}>
-            <b>prev</b>
-          </button>
-          <button onClick={handlePrevious}>
-            <b>next</b>
-          </button>
+      <div className={library_views}>
+        <div className={button_click}>
+          <CustomButton
+            click={handleNext}
+            text={<b>prev</b>}
+            backgroundColor={"#494ca2"}
+          />
+          <CustomButton
+            click={handlePrevious}
+            text={<b>next</b>}
+            backgroundColor={"#494ca2"}
+          />
         </div>
         <div style={{ height: "35%" }}>
-          <img src={image} alt={image} id="library-views" />
+          <CustomImage src={image} alt={image} id={"library-views"} />
         </div>
-        <div className="nav-btn">
+        <div className={high_light}>
           <div className="text">
             <h4 id="h4">{headings}</h4>
             <i id="p">{params}</i>
           </div>
         </div>
       </div>
-      <SerVices />
+      <SerVices
+        cover={cover}
+        categories_class={categories_class}
+        categories_class_btn={categories_class_btn}
+        join={join}
+        ren={ren}
+        cat={cat}
+      />
     </>
   );
 };

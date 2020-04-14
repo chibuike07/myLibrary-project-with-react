@@ -1,0 +1,18 @@
+.catalog {
+  width: 100%;
+  margin-top: 5em;
+}
+.review_wrapper {
+  width: inherit;
+  line-height: 2;
+}
+
+.search_title {
+  width: inherit;
+}
+.search_author {
+  /*  */
+}
+.search_subject {
+  /*  */
+}

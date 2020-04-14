@@ -1,4 +1,4 @@
-.gif {
+.input_wrapper {
   width: 50%;
   display: flex;
   justify-content: center;
@@ -11,19 +11,20 @@
   background-size: contain;
   background-repeat: no-repeat;
   background-blend-mode: hard-light;
-  /* height: 100vh; */
 }
-.gif form {
+.form {
   width: 30%;
   position: absolute;
-  top: 175vh;
-  /* transform: translate(-80%,-20%); */
+  top: 72.5em;
+  display: flex;
+  flex-direction: column;
 }
-.gif form input[type="text"] {
+.form input[type="text"] {
   height: 5vh;
   outline: none;
+  padding-left: 15px;
 }
-.gif form input[type="submit"] {
+.form input[type="submit"] {
   margin-top: 2%;
   height: 7vh;
   border-radius: 20px;
@@ -32,7 +33,7 @@
   outline: none;
   box-shadow: 3px 5px #8170f0;
 }
-.lin {
+.library_services {
   /* height: 10vh; */
   position: absolute;
   display: flex;
@@ -40,14 +41,14 @@
   justify-content: space-around;
   align-items: center;
   line-height: 4;
-  top: 210vh;
+  top: 200vh;
   width: 30%;
 }
-.lin a {
+.library_services a {
   color: #fff;
   text-decoration: none;
 }
-.lin a:hover {
+.library_services a:hover {
   border-bottom: 2px solid #493ca2;
-  padding: 10px;
+  padding-bottom: 10px;
 }

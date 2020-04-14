@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 // export const InputRefs = ({ textInput }) => console.log(textInput.current);
 const Input = ({
   name,
+  list,
   onChange,
   placeholder,
   value,
@@ -41,6 +42,7 @@ const Input = ({
         opacity: opacity ? opacity : null
       }}
       type={type ? type : "text"}
+      list={list ? list : null}
       placeholder={placeholder}
       onChange={onChange}
       value={value ? value : ""}

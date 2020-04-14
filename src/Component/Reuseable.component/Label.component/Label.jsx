@@ -1,11 +1,12 @@
 import React from "react";
 
-const Label = ({ labelFor, text, className, color }) => (
+const Label = ({ labelFor, text, className, color, id }) => (
   <div className="custom_label" style={{ color: color ? color : null }}>
     <label
       htmlFor={labelFor}
       className={className ? className : null}
       style={{ color: color ? color : null }}
+      id={id ? id : null}
     >
       {text}
     </label>

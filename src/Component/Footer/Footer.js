@@ -163,7 +163,7 @@ class Footer extends Component {
     } = FooterStyle;
     return (
       <footer>
-        <div>
+        <div style={{ marginTop: "3em" }}>
           <div className={footer_wrapper}>
             <TopArea
               social_media_contact_wrapper={social_media_contact_wrapper}
