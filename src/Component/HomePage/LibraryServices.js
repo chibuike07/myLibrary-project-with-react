@@ -4,6 +4,8 @@ import LibraryServiceStyle from "./CssFile/LibraryService.module.css";
 import CustomLink from "../Reuseable.component/Link.component/Link.jsx";
 import CustomList from "../Reuseable.component/List.component/List";
 import CustomImage from "../Reuseable.component/Image.component/Image";
+
+//function for image display of the moused components
 const Image = ({ image, style }) => {
   return (
     <div className={LibraryServiceStyle.image_wrapper}>
@@ -12,9 +14,11 @@ const Image = ({ image, style }) => {
   );
 };
 class LibraryServices extends Component {
+  //set image to the state
   state = {
     image: InternetImg
   };
+  //array for library services
   _NavigationForServices = [
     "internet computers",
     "printing",
@@ -23,6 +27,7 @@ class LibraryServices extends Component {
     "wifi in the library of unichris"
   ];
   render() {
+    //destructured style
     const { comp, fieldset, list, serv } = LibraryServiceStyle;
     return (
       <div className={comp}>

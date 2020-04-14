@@ -2,14 +2,19 @@ import React, { useState } from "react";
 import AsideViewStyles from "./LibraryCss _folder/AsideView.module.css";
 import CustomInput from "../Reuseable.component/Input.component/Input";
 import CustomLink from "../Reuseable.component/Link.component/Link";
+
 const InputForBooksTransaction = () => {
+  //destructured styles from asideview styles
   const { input_wrapper, form, library_services } = AsideViewStyles;
+  //set the inputvalue initial value to an empty string
   const [inputValue, setInputValues] = useState("");
 
+  //funtion to input values on change
   const handleChange = ({ target }) => {
     setInputValues(prev => ({ ...prev, [target.name]: target.value }));
   };
 
+  //function for form submit
   const handleSubmit = e => {
     e.preventDefault();
     console.log(inputValue);

@@ -2,6 +2,8 @@ import React from "react";
 import SectionStyle from "./CssFile/Section.module.css";
 import LibraryImage from "./Images/white4.jpg";
 import CustomImage from "../Reuseable.component/Image.component/Image";
+
+//function for about us image views
 const Image = ({ style }) => {
   return (
     <div className={style}>
@@ -9,6 +11,8 @@ const Image = ({ style }) => {
     </div>
   );
 };
+
+//function for about us image view
 const Text = ({ style }) => {
   return (
     <div className={style}>
@@ -36,7 +40,9 @@ const Text = ({ style }) => {
   );
 };
 
+//parent component for the section view of about us
 const Section = () => {
+  // destructured styles
   const { about, about_text, about_img } = SectionStyle;
   return (
     <div className={about}>

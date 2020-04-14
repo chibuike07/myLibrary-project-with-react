@@ -10,7 +10,10 @@ import Threads from "./Threads";
 import ExploreBooks from "./ExploreFiles";
 import Footer from "../Footer/Footer";
 import "../landin-refix.css";
+
+//component for home page
 class Hompage extends Component {
+  //setting member to the state
   state = {
     member: []
   };

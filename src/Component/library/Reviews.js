@@ -1,6 +1,8 @@
 import React from "react";
 import ReviewsStyles from "./LibraryCss _folder/Review.module.css";
+//function for reviews texts
 const Text = () => {
+  //destructured styles
   const {
     catalog,
     search_title,

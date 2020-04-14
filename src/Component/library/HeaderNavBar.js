@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import HeaderNavBArStyles from "./LibraryCss _folder/HeaderNavBAr.module.css";
 import CustomList from "../Reuseable.component/List.component/List";
 import CustomButton from "../Reuseable.component/Button.component/Button";
+// import the arrary for header dropdowns
 import {
   DepartmentsArray,
   holdingsArray,
@@ -9,6 +10,7 @@ import {
   LendingProceduresArray
 } from "./Header_dropDowns";
 
+//function that hold the information about the chief librarian
 const Librarian = ({ style }) => {
   return (
     <div id="Librarian" className={style}>
@@ -33,6 +35,8 @@ const Librarian = ({ style }) => {
     </div>
   );
 };
+
+//function that displays the library departments
 const Departments = ({ style }) => {
   return (
     <div id="Departments" className={style}>
@@ -50,6 +54,7 @@ const Departments = ({ style }) => {
   );
 };
 
+//fuction for library holding list
 const Holdings = ({ style }) => {
   return (
     <div id="Holdings" className={style}>
@@ -57,6 +62,7 @@ const Holdings = ({ style }) => {
       <br />
 
       <ul>
+        {/* conditional rendering  */}
         {holdingsArray
           ? holdingsArray.map((lists, i) => (
               <CustomList text={lists} key={i} color={"#493ca2"} />
@@ -67,6 +73,7 @@ const Holdings = ({ style }) => {
   );
 };
 
+//functiont for guide on the proper use of library
 const Directions = ({ style }) => {
   return (
     <div id="Directions" className={style}>
@@ -84,6 +91,7 @@ const Directions = ({ style }) => {
   );
 };
 
+//function for lending and borrowing procedures
 const LendingProcedures = ({ style }) => {
   return (
     <>
@@ -103,9 +111,12 @@ const LendingProcedures = ({ style }) => {
   );
 };
 
+//parent functions for the header nav bar
 const HeaderNavBar = () => {
+  //setting the librarian component as the initial values for display
   const [displayable, setDisplayable] = useState(<Librarian />);
 
+  //function that look out on an onclick event to render the appropriate component that matches the clicked buttons
   const displayUnits = ({ target }) => {
     let current = target.innerText;
 
@@ -126,6 +137,8 @@ const HeaderNavBar = () => {
       return;
     }
   };
+
+  //destructuring styles
   const {
     tabcontent,
     tablink,

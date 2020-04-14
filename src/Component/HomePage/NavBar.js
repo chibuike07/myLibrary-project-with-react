@@ -5,6 +5,8 @@ import cloudImg from "./Images/cloud.svg";
 import NavBarStyle from "./CssFile/NavBar.module.css";
 import CustomImage from "../Reuseable.component/Image.component/Image";
 import CustomLink from "../Reuseable.component/Link.component/Link";
+
+//component for image preview on the moused text
 const Image = ({ image, style }) => {
   return (
     <div className={style}>
@@ -12,10 +14,14 @@ const Image = ({ image, style }) => {
     </div>
   );
 };
+//navbar component
 class NavBar extends Component {
+  //setting image to the state
   state = {
     image: NetworkImg
   };
+
+  //array of object that holds the text and image to display
   NavigationArray = [
     {
       text: "join the library community",
@@ -31,6 +37,7 @@ class NavBar extends Component {
     }
   ];
 
+  //moused function for the navigation tect
   handleMouseOver = e => {
     e.preventDefault();
     for (let values in this.NavigationArray) {
@@ -39,11 +46,13 @@ class NavBar extends Component {
       }
     }
   };
+  //mouse out function for the navigation tect
   handleMouseout = e => {
     e.preventDefault();
     this.setState({ image: NetworkImg });
   };
   render() {
+    // destructured style
     const { nav, nav_link, nav_img } = NavBarStyle;
     return (
       <div className={nav}>

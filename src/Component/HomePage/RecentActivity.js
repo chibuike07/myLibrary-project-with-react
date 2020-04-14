@@ -2,8 +2,10 @@ import React, { Component } from "react";
 import RecentActivitiesStyle from "./CssFile/RecentActivities.module.css";
 import CustomLink from "../Reuseable.component/Link.component/Link";
 import CustomButton from "../Reuseable.component/Button.component/Button";
+
 class Recent extends Component {
   render() {
+    //destructured styles
     const {
       recent,
       all_act,

@@ -1,6 +1,7 @@
 import React from "react";
 import LibraryServices from "./LibraryServices";
 import HighLightStyles from "./CssFile/HighLight.module.css";
+//function for study and researchers hints
 const Text = () => {
   return (
     <div>
@@ -9,9 +10,9 @@ const Text = () => {
         to experienced academics and whether your research is for personal,
         formal learning or work. our knowledgeable and friendly librarians and
         archivists can help you with everything from investigating your family
-        rree or exploring local history to writing a book or studying for an
-        exam. We are always pleased to suggesst resources to help you and ways
-        to develop your research further. The libratry is a centre of excellence
+        tree, exploring local history to writing a book, studying for an exam.
+        We are always pleased to suggesst resources to help you and ways to
+        develop your research further. The libratry is a centre of excellence
         for knowledge and discobery, with a vast collection of reference
         resources covering every topic under the sun including books, journals,
         periodicals and other publications. There are study spaces, wifi and
@@ -24,6 +25,7 @@ const Text = () => {
   );
 };
 const HighLights = () => {
+  //destructured styles
   const { research } = HighLightStyles;
 
   return (

@@ -3,6 +3,8 @@ import SignUpStyles from "./Register_css/SignUp.module.css";
 import Button from "../Reuseable.component/Button.component/Button";
 import Input from "../Reuseable.component/Input.component/Input";
 const { input, button } = SignUpStyles; //destructured styles from the style.module
+
+//
 class Signup extends React.Component {
   //function for SignUp users
   state = {

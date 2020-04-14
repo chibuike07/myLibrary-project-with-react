@@ -6,9 +6,13 @@ import logoutImg from "./Images/logout.svg";
 import CustomLink from "../Reuseable.component/Link.component/Link";
 import CustomImage from "../Reuseable.component/Image.component/Image";
 import OverViewStyles from "./CssFile/OverView.module.css";
+
+//function for members display
 const Member = ({ member, style }) => {
+  // setting fullname for the state
   const [fullName, setFullName] = useState(null);
 
+  //fucntion that returns the names
   const ReturnNames = () => {
     let [...names] = member;
     for (let name of names) {
@@ -136,6 +140,7 @@ const Log = ({ style }) => {
 };
 class OverViews extends Component {
   render() {
+    //destructured styles
     const { clue, member, statistics, help, log, top_List } = OverViewStyles;
 
     return (

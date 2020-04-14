@@ -2,6 +2,7 @@ import React from "react";
 import HeaderViewStyles from "./CssFile/HeaderView.module.css";
 import CustomLink from "../Reuseable.component/Link.component//Link";
 const HeaderView = () => {
+  //destructured styles
   const { header_wrapper, school_nickname } = HeaderViewStyles;
   return (
     <div className={header_wrapper}>

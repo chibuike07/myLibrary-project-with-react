@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import SearchInputStyles from "./LibraryCss _folder/SearchInput.module.css";
 import CustomInput from "../Reuseable.component/Input.component/Input";
 import CustomLabel from "../Reuseable.component/Label.component/Label";
+
+//function for collection input search form
 const SearchForm = () => {
+  //destructured styles
   const {
     form,
     search_form,
@@ -11,16 +14,18 @@ const SearchForm = () => {
     button,
     search_submit
   } = SearchInputStyles;
+  //setting initial input value to empty array
+  const [inputValues, setInputValues] = useState([]);
 
-  const [states, setstate] = useState("");
-
+  //function to handle the value of the input
   const handleChange = ({ target }) => {
-    setstate(prev => ({ ...prev, [target.name]: target.value }));
+    setInputValues(prev => ({ ...prev, [target.name]: target.value }));
   };
 
+  //function to handle the form on submit
   const handleSubmit = e => {
     e.preventDefault();
-    console.log(states);
+    console.log(inputValues);
   };
   return (
     <div className={form}>
@@ -38,7 +43,7 @@ const SearchForm = () => {
           placeholder={"Search for collections..."}
           name={"search"}
           onChange={handleChange}
-          value={states.search}
+          value={inputValues.search}
           isRequired={true}
         />
 

@@ -6,19 +6,26 @@ import thirdImage from "./Library_Images/e-lib1.jpeg";
 import CustomLink from "../Reuseable.component/Link.component/Link";
 import CustomButton from "../Reuseable.component/Button.component/Button";
 import CustomImage from "../Reuseable.component/Image.component/Image";
-const h4Arr = [
+
+//array for display views titles
+const displayViewTitleArray = [
   "nelson mandela interactive innovation exhibition",
   "place your book order",
   "unichris library"
 ];
-const pArr = [
+
+//array for display view notes
+const diaplayViewNotesArray = [
   "visit hour to christopher university library",
   "feel free to place your orders of collection at your comfort",
   "come and embrace the knowledge that is what while"
 ];
-let len = 0;
+//array for displayviews images
 const array = [elibraryImg, secImage, thirdImage];
 
+let length = 0; //assigning length to zero
+
+// function for the libray services
 const SerVices = ({
   cover,
   categories_class,
@@ -52,37 +59,46 @@ const SerVices = ({
   );
 };
 
+//function for displayview component
 const DisplayView = () => {
+  //setting image to the state for watch out
   const [image, setImage] = useState(elibraryImg);
+  //setting the initial value for display views title
   const [headings, setHeadings] = useState(
     "nelson mandela interactive innovation exhibition"
   );
+
+  //setting the initial value for display views notes
   const [params, setParams] = useState(
     "visit hour to christopher university library"
   );
 
+  //function to display the next slide
   const handleNext = () => {
-    len = len + 1;
-    len = len % array.length;
-    if (array[len]) {
-      setHeadings(h4Arr[len]);
-      setParams(pArr[len]);
+    length = length + 1;
+    length = length % array.length;
+    if (array[length]) {
+      setHeadings(displayViewTitleArray[length]);
+      setParams(diaplayViewNotesArray[length]);
     }
-    setImage(array[len]);
+    setImage(array[length]);
   };
 
+  //function to display the previous slide
   const handlePrevious = () => {
-    if (len === 0) {
-      len = array.length;
+    if (length === 0) {
+      length = array.length;
     } else {
-      len = len - 1;
-      setImage(array[len]);
-      if (array[len]) {
-        setHeadings(h4Arr[len]);
-        setParams(pArr[len]);
+      length = length - 1;
+      setImage(array[length]);
+      if (array[length]) {
+        setHeadings(displayViewTitleArray[length]);
+        setParams(diaplayViewNotesArray[length]);
       }
     }
   };
+
+  //destructuring styles
   const {
     library_views,
     button_click,

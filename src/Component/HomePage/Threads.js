@@ -4,6 +4,7 @@ import PatronFace from "./Images/replace.svg";
 import ThreadStyles from "./CssFile/Threads.module.css";
 import CustomLink from "../Reuseable.component/Link.component/Link";
 import CustomImage from "../Reuseable.component/Image.component/Image";
+//function that holds the testimony hints
 const Testimony = ({ style, childStyle }) => {
   return (
     <div className={style}>
@@ -17,6 +18,7 @@ const Testimony = ({ style, childStyle }) => {
   );
 };
 
+//function that holds the testimony of the users
 const PatronsRecentBookSummary = ({ style, childStyle }) => {
   return (
     <div className={style}>
@@ -50,6 +52,7 @@ const PatronsRecentBookSummary = ({ style, childStyle }) => {
 };
 class Thread extends Component {
   render() {
+    // destrctured styles
     const {
       thread_wrapper,
       testimony_wrapper,

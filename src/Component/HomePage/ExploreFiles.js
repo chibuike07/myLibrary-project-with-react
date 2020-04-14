@@ -1,6 +1,8 @@
 import React from "react";
 import ExploreStyles from "./CssFile/Explore.module.css";
 import CustomButton from "../Reuseable.component/Button.component/Button";
+
+//function for subscribing of book
 const ExploreBooks = () => {
   const { signups, signup } = ExploreStyles;
   return (

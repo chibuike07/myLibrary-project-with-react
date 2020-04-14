@@ -6,6 +6,7 @@ import UnichrisLogo from "../unichris logo.png";
 import FooterStyle from "./Footer.module.css";
 import CustomImage from "../Reuseable.component/Image.component/Image";
 import CustomLink from "../Reuseable.component/Link.component/Link";
+//component for school logo and contact
 const TopArea = ({
   social_media_contact_wrapper,
   school_hint,
@@ -30,6 +31,8 @@ const TopArea = ({
     </div>
   );
 };
+
+//component for the school contact
 const Contacts = ({ school_phone_contact, social_media_logos }) => {
   const phoneArray = [
     "090-377-57032",
@@ -37,6 +40,7 @@ const Contacts = ({ school_phone_contact, social_media_logos }) => {
     "090-377-57036",
     "090-377-57037"
   ];
+  //array for social handle images
   const logoArray = [FaceBookLogo, LinkedinLogo, Email];
   return (
     <div>
@@ -74,6 +78,7 @@ const Contacts = ({ school_phone_contact, social_media_logos }) => {
   );
 };
 
+//components for news and feeds of the library
 const Services = ({ service_wrapper, service_links_wrapper }) => {
   const serviceListArray = [
     "About unchris",
@@ -96,6 +101,7 @@ const Services = ({ service_wrapper, service_links_wrapper }) => {
   );
 };
 
+//component for categories of collectionS of the library
 const Categories = ({ footer_categories, categories_list }) => {
   const categories_listArray = [
     "fiction books",
@@ -117,6 +123,8 @@ const Categories = ({ footer_categories, categories_list }) => {
     </div>
   );
 };
+
+//component for easylink to library holdings
 const EasyLink = ({
   footer_easy_links,
   categories_list,
@@ -146,6 +154,7 @@ const EasyLink = ({
 };
 class Footer extends Component {
   render() {
+    // destrctured styles
     const {
       footer_wrapper,
       social_media_contact_wrapper,

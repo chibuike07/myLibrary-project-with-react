@@ -2,13 +2,14 @@ import React from "react";
 import ContentStyles from "./LibraryCss _folder/Content.module.css";
 import CustomList from "../Reuseable.component/List.component/List";
 const Content = () => {
+  //array for library departments
   const LibDepartments = [
     "Office Of The Librarian",
     "Technical Service Department",
     "Users Service Department",
     "E-Library Department"
   ];
-
+  //destrctured content style module
   const { content } = ContentStyles;
   return (
     <>
@@ -35,6 +36,7 @@ const Content = () => {
         <br />
         <br />
         <ul>
+          {/*condition to check if the array exist and to the mapping through the departments array and append it to the customlist element */}
           {LibDepartments
             ? LibDepartments.map((department, i) => (
                 <CustomList text={department} key={i} />

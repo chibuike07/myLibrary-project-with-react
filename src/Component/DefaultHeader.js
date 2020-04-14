@@ -1,12 +1,21 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import unchrisLogo from "./unichris logo.png";
-import "./DefaultHeader.css";
+import DefaultHeaderStyle from "./DefaultHeader.module.css";
+import CustomLink from "./Reuseable.component/Link.component/Link";
+import CustomImage from "./Reuseable.component/Image.component/Image";
 const DefaultHeader = () => {
+  const {
+    header,
+    headTop,
+    logo,
+    displayed_list,
+    DefaultHeader_wrapper
+  } = DefaultHeaderStyle;
+  //declaring states
   const [userName, setUserName] = useState("chime");
-  const [weekday, setWeekDay] = useState("");
-  const [time, setTime] = useState("");
-
+  const [weekday, setWeekDay] = useState(null);
+  const [time, setTime] = useState(null);
+  //function for days of the week
   const weekDay = () => {
     let date = new Date();
     let day = [
@@ -20,47 +29,51 @@ const DefaultHeader = () => {
     ];
     // assigning value to date and weekday
     setWeekDay(`Today is ${day[date.getDay()]}`);
-    // setTimeout(weekDay, 500);
   };
+  //getting the fullName of the logged in user
   const userNameData = () => {
-    let logger = JSON.parse(localStorage.getItem("loggerName"));
+    let logger = JSON.parse(sessionStorage.getItem("loggerName"));
     if (logger) {
       setUserName(logger);
     } else return;
   };
-  const times = () => {
+
+  //function for local time format(24hr)
+
+  window.setTimeout(times, 1000);
+  function times() {
     let date = new Date();
     let timeIn12HrsFormat = date.toLocaleTimeString();
-    setTime(timeIn12HrsFormat);
-    window.setTimeout(times, 500);
-  };
+    return setTime(timeIn12HrsFormat);
+  }
+
+  //loading some functions on component did mount
   useEffect(() => {
     weekDay();
     userNameData();
-    times();
   });
-  // useEffect(() => {
-  // }, []);
   return (
-    <header>
-      <div className="headTop">
-        <div className="logo">
-          <img src={unchrisLogo} alt={unchrisLogo} />
-        </div>
-        <div>
-          <h4 id="day">{weekday}</h4>
-          <h5 id="time">{time}</h5>
-        </div>
-        <div className="displayed-list">
-          <Link to="/home">home</Link>
-          <Link to="/service">services</Link>
-          <Link to="/demo">demo</Link>
-        </div>
-        <div className="personDetail">
-          {/* <img src="" alt="" /> */}
-          <h4>
-            <cite id="person-data">{userName}</cite>
-          </h4>
+    <header className={header}>
+      <div className={DefaultHeader_wrapper}>
+        <div className={headTop}>
+          <div className={logo}>
+            <CustomImage src={unchrisLogo} alt={unchrisLogo} />
+          </div>
+          <div>
+            <h4 id="day">{weekday}</h4>
+            <h5 id="time">{time}</h5>
+          </div>
+          <div className={displayed_list}>
+            <CustomLink url={"/home"} text={"Home"} color={"#493ca2"} />
+            <CustomLink url={"/service"} text={"Services"} color={"#493ca2"} />
+            <CustomLink url={"/demo"} text={"Demo"} color={"#493ca2"} />
+          </div>
+          <div className="personDetail">
+            {/* <img src="" alt="" /> */}
+            <h4>
+              <cite id="person-data">{userName}</cite>
+            </h4>
+          </div>
         </div>
       </div>
     </header>

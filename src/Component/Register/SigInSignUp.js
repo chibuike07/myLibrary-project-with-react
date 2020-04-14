@@ -4,6 +4,7 @@ import SignIn from "./SingIn";
 import UnichrisLogo from "../unichris logo.png";
 import Button from "../Reuseable.component/Button.component/Button";
 import SignInSignUpStyles from "./Register_css/SignInSignUp.module.css";
+//destructuring the styles
 const {
   container,
   signup,
@@ -13,6 +14,7 @@ const {
   signin,
   reg
 } = SignInSignUpStyles;
+//getstarted component for signin page
 const GetStarted = () => {
   return (
     <div className={get_started}>
@@ -24,7 +26,9 @@ const GetStarted = () => {
   );
 };
 
+
 class RegisterPage extends Component {
+  // declaring the states
   state = {
     displayForm: false,
     displaySignUpBut: true,
@@ -34,6 +38,7 @@ class RegisterPage extends Component {
     count: 0
   };
 
+  //function for signup click on click
   handleSignUpClick = () => {
     this.setState({
       displayForm: !this.state.displayForm,
@@ -41,6 +46,8 @@ class RegisterPage extends Component {
       displaySignInBut_bt: !this.state.displaySignInBut_bt
     });
   };
+
+  //function for sign in button on click
   handleSignInClick = () => {
     this.setState({
       displaySignInBut: !this.state.displaySignInBut,
@@ -48,6 +55,7 @@ class RegisterPage extends Component {
       displaySignUpBut: !this.state.displaySignUpBut
     });
   };
+  //function for routing to the sign in page after sign up
   handleDisplaySignInOnSignUpClick = () => {
     if (localStorage.getItem("userDatas").length + 1) {
       this.setState({
@@ -58,11 +66,14 @@ class RegisterPage extends Component {
       });
     }
   };
+
+  //function for count of users that visited the page 
   VistedCount = () => {
     this.setState({ count: this.state.count + 1 });
     let seTime = setTimeout(this.VistedCount, 5000);
     clearTimeout(seTime);
   };
+  //setting the visited count on component did mount
   componentDidMount() {
     this.VistedCount();
   }
