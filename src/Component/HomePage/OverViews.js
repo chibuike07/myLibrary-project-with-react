@@ -14,11 +14,11 @@ const Member = ({ member, style }) => {
 
   //fucntion that returns the names
   const ReturnNames = () => {
-    let [...names] = member;
-    for (let name of names) {
-      let nameData = `${name.fname} ${name.lname}`;
-      setFullName(nameData);
-    }
+    member.forEach(element => {
+      let res = `${element.fname} ${element.lname} `;
+      setFullName(res);
+    });
+    // console.log(fullName);
   };
   useEffect(() => {
     ReturnNames();
@@ -27,12 +27,12 @@ const Member = ({ member, style }) => {
   return (
     <div className={style}>
       <CustomLink
-        url={"/home/" + fullName}
+        url={"/home/member/"}
         text={<CustomImage src={manager} alt={manager} height={"30px"} />}
       />
       <br />
       <CustomLink
-        url={"/home/" + fullName}
+        url={"/home/member/"}
         id={"memb"}
         text={
           <div
@@ -142,7 +142,6 @@ class OverViews extends Component {
   render() {
     //destructured styles
     const { clue, member, statistics, help, log, top_List } = OverViewStyles;
-
     return (
       <div className={clue}>
         <div className={top_List}>

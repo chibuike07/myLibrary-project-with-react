@@ -3,7 +3,9 @@ import unchrisLogo from "./unichris logo.png";
 import DefaultHeaderStyle from "./DefaultHeader.module.css";
 import CustomLink from "./Reuseable.component/Link.component/Link";
 import CustomImage from "./Reuseable.component/Image.component/Image";
-const DefaultHeader = () => {
+import { withRouter } from "react-router-dom";
+const DefaultHeader = ({ match }) => {
+  // console.log(match);
   const {
     header,
     headTop,
@@ -12,9 +14,10 @@ const DefaultHeader = () => {
     DefaultHeader_wrapper
   } = DefaultHeaderStyle;
   //declaring states
-  const [userName, setUserName] = useState("chime");
-  const [weekday, setWeekDay] = useState(null);
-  const [time, setTime] = useState(null);
+  const [userName, setUserName] = useState(["chime"]);
+  const [weekday, setWeekDay] = useState([]);
+  const [time, setTime] = useState([]);
+  const [mounted, setMounted] = useState(false);
   //function for days of the week
   const weekDay = () => {
     let date = new Date();
@@ -39,19 +42,20 @@ const DefaultHeader = () => {
   };
 
   //function for local time format(24hr)
-
-  window.setTimeout(times, 1000);
-  function times() {
+  const clock = () => {
     let date = new Date();
     let timeIn12HrsFormat = date.toLocaleTimeString();
-    return setTime(timeIn12HrsFormat);
-  }
+    setTime(timeIn12HrsFormat);
+    window.setTimeout(clock, 1000);
+  };
 
   //loading some functions on component did mount
   useEffect(() => {
     weekDay();
     userNameData();
+    return clock();
   });
+
   return (
     <header className={header}>
       <div className={DefaultHeader_wrapper}>
@@ -80,4 +84,4 @@ const DefaultHeader = () => {
   );
 };
 
-export default DefaultHeader;
+export default withRouter(DefaultHeader);
