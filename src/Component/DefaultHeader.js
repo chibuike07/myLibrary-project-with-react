@@ -17,7 +17,6 @@ const DefaultHeader = ({ match }) => {
   const [userName, setUserName] = useState(["chime"]);
   const [weekday, setWeekDay] = useState([]);
   const [time, setTime] = useState([]);
-  const [mounted, setMounted] = useState(false);
   //function for days of the week
   const weekDay = () => {
     let date = new Date();
@@ -53,7 +52,7 @@ const DefaultHeader = ({ match }) => {
   useEffect(() => {
     weekDay();
     userNameData();
-    return clock();
+    clock();
   });
 
   return (

@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from "react";
+import React, { Component } from "react";
 import manager from "./Images/manager.svg";
 import chart from "./Images/chart (1).svg";
 import HelpImg from "./Images/help (1).svg";
@@ -9,21 +9,6 @@ import OverViewStyles from "./CssFile/OverView.module.css";
 
 //function for members display
 const Member = ({ member, style }) => {
-  // setting fullname for the state
-  const [fullName, setFullName] = useState(null);
-
-  //fucntion that returns the names
-  const ReturnNames = () => {
-    member.forEach(element => {
-      let res = `${element.fname} ${element.lname} `;
-      setFullName(res);
-    });
-    // console.log(fullName);
-  };
-  useEffect(() => {
-    ReturnNames();
-  });
-
   return (
     <div className={style}>
       <CustomLink
@@ -59,7 +44,7 @@ const Statistic = ({ style }) => {
   return (
     <div className={style}>
       <CustomLink
-        url={"/home/statistics"}
+        url={"/statistics"}
         text={<CustomImage src={chart} alt={chart} height={"30px"} />}
       />
       <br />
@@ -77,7 +62,7 @@ const Statistic = ({ style }) => {
             <p>Unichris daily analysis. let know how we are growing!!!</p>
           </div>
         }
-        url={"/home/statistics"}
+        url={"/statistics"}
       />
     </div>
   );

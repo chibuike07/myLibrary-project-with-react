@@ -1,15 +1,17 @@
 import React from "react";
-
-const ButtonBox = () => {
+import CustomButton from "../Reuseable.component/Button.component/Button";
+const ButtonBox = ({ handleAddToTable, handleDayDifferent }) => {
   return (
-    <div class="box-3">
-      <button type="submit" onclick="week(this)">
-        Check_data
-      </button>
-      <button onclick="add()">Add_Data</button>
-      <button onclick="save()">save_Data</button>
-      <button onclick="editTable(this)">Edit_Data</button>
-      <button onclick="remove(this)">Remove_Data</button>
+    <div className="box-3">
+      <CustomButton
+        type={"submit"}
+        text={"Check_data"}
+        click={handleDayDifferent}
+      />
+      <CustomButton text={"Add_Data"} click={handleAddToTable} />
+      <CustomButton text={"Save_data"} />
+      <CustomButton text={"Edit_Data"} />
+      <CustomButton text={">Remove_Data"} />
       {/* <button onclick="load(this)">load_books_Data</button> --> */}
     </div>
   );

@@ -3,7 +3,7 @@ const Statistics = props => {
   const [membersCount, setMemberCount] = useState(0);
   const [studentCount, setStudentCount] = useState(0);
   const [NotSchoolMembers, setNotSchoolMember] = useState(0);
-  // const [vistedCount, setVisitedCount] = useState(0);
+  const [vistedCount, setVisitedCount] = useState(0);
 
   const datas = () => {
     const fetchData = JSON.parse(localStorage.getItem("userDatas"));
@@ -14,17 +14,23 @@ const Statistics = props => {
     setNotSchoolMember(notStudent.length);
     setMemberCount(fetchData.length);
     setStudentCount(studentCo.length);
-    // setVisitedCount(props.count);
+  };
+
+  const visitedCount = () => {
+    const storage = JSON.parse(localStorage.getItem("visitedCount"));
+    setVisitedCount(storage);
+    console.log(storage);
   };
   useEffect(() => {
     datas();
+    visitedCount();
   }, []);
   return (
     <>
       <div>memberCount : {membersCount}</div>
       <div> studentCount: {studentCount}</div>
       <div>NotSchoolMembers: {NotSchoolMembers}</div>
-      {/* <div>vistedCo: {vistedCount}</div> */}
+      <div>vistedCo: {vistedCount}</div>
     </>
   );
 };

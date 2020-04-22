@@ -17,7 +17,15 @@ const InputForBooksTransaction = () => {
   //function for form submit
   const handleSubmit = e => {
     e.preventDefault();
-    console.log(inputValue);
+    // let bookTransaction = inputValue.auth;
+    renewBook();
+  };
+  const renewBook = () => {
+    let bookTransaction = inputValue.auth;
+    if (bookTransaction === "renew") {
+      let promptForRenewBook = window.prompt("");
+      console.log("renew");
+    }
   };
   return (
     // <div>
