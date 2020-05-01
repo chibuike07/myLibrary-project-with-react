@@ -1,5 +1,6 @@
 import React from "react";
 import CustomInput from "../Reuseable.component/Input.component/Input";
+import FirstInputStyles from "./booktransaction_styles/FirstInput.module.css";
 const BoxOne = ({ handleChange, values }) => {
   const {
     name,
@@ -10,8 +11,10 @@ const BoxOne = ({ handleChange, values }) => {
     author,
     title
   } = values;
+
+  const { box_1, inputBox } = FirstInputStyles;
   return (
-    <div className="box-1">
+    <div className={box_1}>
       <CustomInput
         placeholder={"Name"}
         type={"text"}
@@ -19,6 +22,7 @@ const BoxOne = ({ handleChange, values }) => {
         id={"N"}
         value={name}
         onChange={handleChange}
+        className={inputBox}
       />
       <br />
       <CustomInput
@@ -28,6 +32,7 @@ const BoxOne = ({ handleChange, values }) => {
         id={"UN"}
         value={user_number}
         onChange={handleChange}
+        className={inputBox}
       />
       <br />
       <CustomInput
@@ -37,6 +42,7 @@ const BoxOne = ({ handleChange, values }) => {
         id={"UD"}
         value={user_department}
         onChange={handleChange}
+        className={inputBox}
       />
       <br />
       <CustomInput
@@ -45,6 +51,7 @@ const BoxOne = ({ handleChange, values }) => {
         name={"date"}
         value={date}
         onChange={handleChange}
+        className={inputBox}
       />
 
       <br />
@@ -55,6 +62,7 @@ const BoxOne = ({ handleChange, values }) => {
         id={"WD"}
         value={weekday}
         onChange={handleChange}
+        className={inputBox}
       />
       <br />
       <CustomInput
@@ -64,6 +72,7 @@ const BoxOne = ({ handleChange, values }) => {
         id={"A"}
         value={author}
         onChange={handleChange}
+        className={inputBox}
       />
       <br />
       <CustomInput
@@ -73,6 +82,7 @@ const BoxOne = ({ handleChange, values }) => {
         id={"T"}
         value={title}
         onChange={handleChange}
+        className={inputBox}
       />
     </div>
   );

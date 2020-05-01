@@ -1,0 +1,75 @@
+.table_container {
+  width: 100%;
+  background-color: (#c6cbef);
+  background: repeating-linear-gradient(
+      rgba(0.003, 0.2, 12, 0.7),
+      rgba(33, 44, 55, 0.7)
+    ),
+    url("../Book_transaction_images/white4.jpg");
+  background-size: contain;
+  background-repeat: round;
+  height: 650px;
+  background-color: #6b58e6;
+}
+
+.table_container h1,
+h3 {
+  margin-top: 0px;
+  color: #fff;
+  padding: 0.5em;
+  font-family: "Itim", cursive;
+  letter-spacing: 3px;
+  cursor: pointer;
+}
+.manual {
+  width: 15%;
+  height: 20%;
+  overflow-y: scroll;
+  position: relative;
+  left: 7.3em;
+  display: none;
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  color: #fff;
+}
+.myForm {
+  display: flex;
+  color: #e3e7f1;
+  justify-content: center;
+  flex-wrap: wrap;
+  font-family: "Charm", cursive;
+  font-size: larger;
+  align-self: center;
+  line-height: 2;
+  text-transform: capitalize;
+}
+::placeholder {
+  color: #fff;
+}
+
+.boxWrapper {
+  display: grid;
+  grid-gap: 15em;
+}
+.table_wrapper {
+  width: 100%;
+  background-color: #ccc;
+  background-size: cover;
+  background-repeat: round;
+  height: 300px;
+  overflow-y: scroll;
+  color: #000;
+  background-blend-mode: soft-light;
+  font-family: "Itim", cursive;
+}
+.table_wrapper table {
+  width: 100%;
+}
+.table_wrapper table th {
+  color: #000;
+  font-weight: bolder;
+}

@@ -1,6 +1,6 @@
 import React from "react";
 import CustomInput from "../Reuseable.component/Input.component/Input";
-
+import SecondInputStyle from "./booktransaction_styles/SecondInput.module.css";
 const BoxTwo = ({ handleChange, values }) => {
   const {
     isbn,
@@ -11,10 +11,9 @@ const BoxTwo = ({ handleChange, values }) => {
     added_days,
     fine
   } = values;
-  // console.log(values);
-  // console.log(isbn);
+  const { box_2, inputBox } = SecondInputStyle;
   return (
-    <div className="box-2">
+    <div className={box_2}>
       <CustomInput
         placeholder={"Isbn"}
         type={"text"}
@@ -22,6 +21,7 @@ const BoxTwo = ({ handleChange, values }) => {
         id={"I"}
         value={isbn}
         onChange={handleChange}
+        className={inputBox}
       />
 
       <br />
@@ -32,6 +32,7 @@ const BoxTwo = ({ handleChange, values }) => {
         id={"AN"}
         value={accession_number}
         onChange={handleChange}
+        className={inputBox}
       />
       <br />
       <CustomInput
@@ -41,6 +42,7 @@ const BoxTwo = ({ handleChange, values }) => {
         id={"ID"}
         value={issue_date}
         onChange={handleChange}
+        className={inputBox}
       />
       <br />
       <CustomInput
@@ -50,6 +52,7 @@ const BoxTwo = ({ handleChange, values }) => {
         id={"RD"}
         value={return_day}
         onChange={handleChange}
+        className={inputBox}
       />
       <br />
       <CustomInput
@@ -59,6 +62,7 @@ const BoxTwo = ({ handleChange, values }) => {
         id={"TD"}
         value={total_days}
         onChange={handleChange}
+        className={inputBox}
       />
       <br />
       <CustomInput
@@ -68,6 +72,7 @@ const BoxTwo = ({ handleChange, values }) => {
         id={"AD"}
         value={added_days}
         onChange={handleChange}
+        className={inputBox}
       />
       <br />
       <CustomInput
@@ -77,6 +82,7 @@ const BoxTwo = ({ handleChange, values }) => {
         id={"fine"}
         value={fine}
         onChange={handleChange}
+        className={inputBox}
       />
     </div>
   );

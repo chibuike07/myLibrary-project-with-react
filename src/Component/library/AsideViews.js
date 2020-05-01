@@ -21,10 +21,20 @@ const InputForBooksTransaction = () => {
     renewBook();
   };
   const renewBook = () => {
+    //get the search value
     let bookTransaction = inputValue.auth;
+    //renew collections
     if (bookTransaction === "renew") {
-      let promptForRenewBook = window.prompt("");
-      console.log("renew");
+      //add title of the book
+      let promptForRenewBook = window.prompt("please write down the title", "");
+      if (promptForRenewBook) {
+        //check for clarity
+        let confirmNeed = window.confirm("Are you ok with the spellings");
+        if (confirmNeed === true) {
+          console.log(promptForRenewBook);
+        }
+      }
+      // console.log("renew");
     }
   };
   return (

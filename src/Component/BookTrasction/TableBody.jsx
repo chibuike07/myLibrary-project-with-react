@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, useEffect } from "react";
 
 const TableBody = ({ values }) => {
   const [datas, setData] = useState([]);

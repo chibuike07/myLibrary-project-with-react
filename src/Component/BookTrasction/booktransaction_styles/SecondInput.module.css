@@ -1,0 +1,16 @@
+.box_2 {
+  margin-right: 1.5em;
+}
+.inputBox {
+  width: 15em;
+  height: 3em;
+  border-radius: 10px;
+  padding-left: 3%;
+  text-transform: capitalize;
+  outline: 0;
+  border: none;
+  border-bottom: 2px solid #494ca2;
+  background-color: transparent;
+  font-size: 20px;
+  color: #fff;
+}

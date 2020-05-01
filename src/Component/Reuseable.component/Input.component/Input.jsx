@@ -21,7 +21,10 @@ const Input = ({
   backgroundColor,
   color,
   opacity,
-  isRefs
+  isRefs,
+  autoComplete,
+  autoCorrect,
+  spellCheck
 }) => {
   const textInput = useRef(null);
   // InputRefs({ textInput });
@@ -51,6 +54,9 @@ const Input = ({
       required={isRequired}
       id={id ? id : null}
       ref={isRefs ? (isRefs = textInput) : null}
+      autoComplete={autoComplete ? autoComplete : null}
+      autoCorrect={autoCorrect ? autoCorrect : null}
+      spellCheck={spellCheck ? spellCheck : null}
     />
   );
 };

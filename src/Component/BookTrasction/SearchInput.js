@@ -1,26 +1,28 @@
 import React, { useState } from "react";
 import CustomInput from "../Reuseable.component/Input.component/Input";
+import SearchInputStyles from "./booktransaction_styles/SearchInput.module.css";
 const SearchInput = () => {
-  const [filterValue, setFilterValue] = useState("");
+  const [filterValue, setFilterValue] = useState({
+    search: ""
+  });
   const handleChange = ({ target }) => {
     setFilterValue(prev => ({ ...prev, [target.name]: target.value }));
     console.log(target.value);
   };
-  // console.log(filterValue);
+  const { searchBox } = SearchInputStyles;
   return (
     <div className="dom-holders">
-      {/* <p id="number of books">hello</p>
-      <p id="result">result</p>
-      <p id="dem">it me</p> */}
-
       <CustomInput
         type={"text"}
-        placeholder={"user-information"}
+        placeholder={"search by name"}
         id={"userFil"}
-        onkeyup={"filter()"}
         name={"search"}
-        // value={filterValue.search}
+        value={filterValue.search}
         onChange={handleChange}
+        className={searchBox}
+        autoComplete={"off"}
+        autoCorrect={"on"}
+        spellCheck={"on"}
       />
     </div>
   );

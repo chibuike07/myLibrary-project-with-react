@@ -5,6 +5,7 @@ import SearchBar from "./SearchInput";
 import ButtonBox from "./ButtonBox";
 import TableHead from "./TableHead";
 import TableBody from "./TableBody";
+import Book_activitiesStyles from "./booktransaction_styles/Book_Activities.module.css";
 class BooksActivities extends Component {
   state = {
     name: "",
@@ -117,34 +118,45 @@ class BooksActivities extends Component {
     // this.handleTotalDay();
   }
   render() {
+    const {
+      table_container,
+      manual,
+      container,
+      myForm,
+      boxWrapper,
+      table_wrapper
+    } = Book_activitiesStyles;
     return (
-      <div className="table-container">
-        <div className="manual">
+      <div className={table_container}>
+        <div className={manual}>
           <cite id="cite">goin here</cite>
         </div>
         <h1> Keep Record Of Your Charging And Discharging Of Collections</h1>
 
-        <div className="container">
+        <div className={container}>
           <form
-            className="myForm"
+            className={myForm}
             id="f"
             method="POST"
-            // autoComplete="off"
+            autoComplete="off"
             ref="form"
             onSubmit={this.handleSubmit}
           >
             <BoxOne handleChange={this.handleChange} values={this.state} />
             <BoxTwo handleChange={this.handleChange} values={this.state} />
-            <button></button>
+            {/* <button></button> */}
           </form>
-          <ButtonBox
-            handleAddToTable={this.handleAddToTable}
-            handleDayDifferent={this.handleDayDifferent}
-          />
-          <SearchBar />
+          <div className={boxWrapper}>
+            <ButtonBox
+              handleAddToTable={this.handleAddToTable}
+              handleDayDifferent={this.handleDayDifferent}
+            />
+
+            <SearchBar />
+          </div>
         </div>
 
-        <div className="tbl">
+        <div className={table_wrapper}>
           <table ref="table" border="3">
             <TableHead />
             <TableBody values={this.state.tableBodyData} />
