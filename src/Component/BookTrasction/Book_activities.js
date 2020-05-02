@@ -21,7 +21,7 @@ class BooksActivities extends Component {
     return_day: "",
     total_days: "",
     added_days: "",
-    fine: "",
+    fine: "0",
     tableBodyData: []
   };
   Day = [
@@ -44,11 +44,34 @@ class BooksActivities extends Component {
         new Date(this.state.return_day).getDate() -
         new Date(this.state.issue_date).getDate();
       this.setState({ total_days: Math.abs(res) });
+      this.handleAddedDay();
     } else if (this.state.return_day === "") {
       this.setState({ total_days: parseInt(0) });
     }
     return;
   };
+  handleAddedDay = () => {
+    let { total_days } = this.state;
+    if (total_days) {
+      if (total_days > 7) {
+        let res = parseFloat(total_days) - 7;
+        this.setState(() => ({ added_days: res }));
+        // this.handleFine();
+      } else {
+        this.setState({ added_days: "0" });
+      }
+    }
+  };
+  handleFine = () => {
+    let { added_days } = this.state;
+
+    if (added_days) {
+      let res = parseFloat(added_days) * 100;
+      this.setState({ fine: res });
+    }
+    console.log(this.refs.form[13]);
+  };
+
   handleChange = ({ target }) => {
     this.setState(prev => ({ ...prev, [target.name]: target.value }));
   };
@@ -113,10 +136,50 @@ class BooksActivities extends Component {
     }));
   };
 
+  handleSave = () => {
+    if (this.state.tableBodyData.length < 1) {
+      console.log("prev state");
+    } else {
+      console.log(this.state.tableBodyData);
+      try {
+        if (localStorage.getItem("collection_date") === null) {
+          localStorage.setItem(
+            "collection_data",
+            JSON.stringify(this.state.tableBodyData)
+          );
+        } else {
+          let formData = {
+            name: this.state.name,
+            user_number: this.state.user_number,
+            user_department: this.state.user_department,
+            date: this.state.date,
+            weekday: this.state.weekday,
+            author: this.state.author,
+            title: this.state.title,
+            isbn: this.state.isbn,
+            accession_number: this.state.accession_number,
+            issue_date: this.state.issue_date,
+            return_day: this.state.return_day,
+            total_days: this.state.total_days,
+            added_days: this.state.added_days,
+            fine: this.state.fine
+          };
+          console.log(formData);
+          let storage = JSON.parse(localStorage.getItem("collection_data"));
+          storage.push(formData);
+          localStorage.setItem("collection_data", JSON.stringify(storage));
+          console.log(storage);
+        }
+      } catch (error) {
+        console.log("error", error);
+      }
+    }
+  };
   componentDidMount() {
     this.handleDay();
     // this.handleTotalDay();
   }
+
   render() {
     const {
       table_container,
@@ -143,13 +206,18 @@ class BooksActivities extends Component {
             onSubmit={this.handleSubmit}
           >
             <BoxOne handleChange={this.handleChange} values={this.state} />
-            <BoxTwo handleChange={this.handleChange} values={this.state} />
+            <BoxTwo
+              handleChange={this.handleChange}
+              values={this.state}
+              handleFine={this.handleFine}
+            />
             {/* <button></button> */}
           </form>
           <div className={boxWrapper}>
             <ButtonBox
               handleAddToTable={this.handleAddToTable}
               handleDayDifferent={this.handleDayDifferent}
+              handleSave={this.handleSave}
             />
 
             <SearchBar />

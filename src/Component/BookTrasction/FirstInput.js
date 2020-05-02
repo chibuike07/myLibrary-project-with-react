@@ -52,6 +52,7 @@ const BoxOne = ({ handleChange, values }) => {
         value={date}
         onChange={handleChange}
         className={inputBox}
+        readOnly={true}
       />
 
       <br />
@@ -63,6 +64,7 @@ const BoxOne = ({ handleChange, values }) => {
         value={weekday}
         onChange={handleChange}
         className={inputBox}
+        readOnly={true}
       />
       <br />
       <CustomInput

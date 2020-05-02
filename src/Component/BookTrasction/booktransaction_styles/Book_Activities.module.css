@@ -40,7 +40,6 @@ h3 {
   display: flex;
   color: #e3e7f1;
   justify-content: center;
-  flex-wrap: wrap;
   font-family: "Charm", cursive;
   font-size: larger;
   align-self: center;

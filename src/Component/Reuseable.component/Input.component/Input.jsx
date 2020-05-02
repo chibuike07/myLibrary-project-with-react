@@ -24,7 +24,9 @@ const Input = ({
   isRefs,
   autoComplete,
   autoCorrect,
-  spellCheck
+  spellCheck,
+  readOnly,
+  onInput
 }) => {
   const textInput = useRef(null);
   // InputRefs({ textInput });
@@ -57,6 +59,8 @@ const Input = ({
       autoComplete={autoComplete ? autoComplete : null}
       autoCorrect={autoCorrect ? autoCorrect : null}
       spellCheck={spellCheck ? spellCheck : null}
+      readOnly={readOnly ? readOnly : null}
+      onInput={onInput ? onInput : null}
     />
   );
 };
