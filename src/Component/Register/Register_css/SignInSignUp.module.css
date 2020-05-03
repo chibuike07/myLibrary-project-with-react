@@ -47,9 +47,6 @@
   margin-top: 10%;
 }
 
-::placeholder {
-  color: #494ca2;
-}
 .formCont {
   margin-right: 5%;
   height: 100vh;
@@ -81,7 +78,7 @@
   height: 5.3vh;
   background: linear-gradient(#494ca2, #8185d5);
   border-radius: 12px;
-  color: #fff;
+  /* color: #fff; */
   outline: none;
   border-style: none;
   letter-spacing: 0.2px;

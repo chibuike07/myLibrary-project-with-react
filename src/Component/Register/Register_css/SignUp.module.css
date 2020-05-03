@@ -1,3 +1,7 @@
+.signUpForm {
+  margin-top: 50px;
+}
+
 .input[type="email"],
 .input[type="password"],
 .input[type="text"],
@@ -12,12 +16,15 @@
   border-bottom: 2px solid #494ca2;
   background-color: transparent;
   font-size: 20px;
-  color: #000;
+}
+
+.input::placeholder {
+  color: #494ca2;
 }
 .button[name="signup"] {
   position: absolute;
-  top: 29em;
-  right: 10%;
+  top: 25em;
+  right: 15%;
   width: 9.5em;
   height: 5.3vh;
   background: linear-gradient(#494ca2, #8186d5);

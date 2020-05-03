@@ -4,7 +4,6 @@ import Input from "../Reuseable.component/Input.component/Input";
 import { withRouter } from "react-router-dom";
 // import { InputRefs } from "../Reuseable.component/Input.component/Input";
 import Button from "../Reuseable.component/Button.component/Button";
-const { signup, button, input_wrapper } = SignInStyles;
 
 class SignIn extends React.Component {
   //declare a function SignIn
@@ -69,6 +68,7 @@ class SignIn extends React.Component {
     }
   };
   render() {
+    const { signup, button, input_wrapper } = SignInStyles;
     return (
       <form onSubmit={this.handleLogInForm}>
         <div className={input_wrapper}>

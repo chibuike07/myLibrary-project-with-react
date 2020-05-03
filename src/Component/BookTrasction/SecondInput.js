@@ -77,6 +77,7 @@ const BoxTwo = ({ handleChange, values, handleFine }) => {
         readOnly={true}
         onInput={handleFine}
       />
+
       <br />
       <CustomInput
         placeholder={"Fine"}

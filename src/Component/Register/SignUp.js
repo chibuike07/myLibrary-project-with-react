@@ -1,8 +1,7 @@
 import React from "react";
 import SignUpStyles from "./Register_css/SignUp.module.css";
 import Button from "../Reuseable.component/Button.component/Button";
-import Input from "../Reuseable.component/Input.component/Input";
-const { input, button } = SignUpStyles; //destructured styles from the style.module
+import CustomInput from "../Reuseable.component/Input.component/Input";
 
 //
 class Signup extends React.Component {
@@ -136,10 +135,12 @@ class Signup extends React.Component {
     }
   }
   render() {
+    const { input, button, signUpForm } = SignUpStyles; //destructured styles from the style.module
+
     return (
-      <form ref="form" onSubmit={this.handleUSerSigUp}>
+      <form ref="form" onSubmit={this.handleUSerSigUp} className={signUpForm}>
         <div ref="inputs">
-          <Input
+          <CustomInput
             type={"text"}
             name={"fname"}
             placeholder={"First name"}
@@ -147,9 +148,10 @@ class Signup extends React.Component {
             onChange={this.handleChange}
             value={this.state.fname}
             isRequired={true}
+            color={"black"}
           />
           <br />
-          <Input
+          <CustomInput
             type={"text"}
             name={"lname"}
             placeholder={"Last name"}
@@ -159,7 +161,7 @@ class Signup extends React.Component {
             isRequired={true}
           />
           <br />
-          <Input
+          <CustomInput
             type={"text"}
             name={"gender"}
             placeholder={"Gender"}
@@ -169,7 +171,7 @@ class Signup extends React.Component {
             isRequired={true}
           />
           <br />
-          <Input
+          <CustomInput
             type={"text"}
             name={"dsp"}
             placeholder={"Displine"}
@@ -179,7 +181,7 @@ class Signup extends React.Component {
             isRequired={true}
           />
           <br />
-          <Input
+          <CustomInput
             type={"number"}
             name={"num"}
             placeholder={"Number"}
@@ -190,7 +192,7 @@ class Signup extends React.Component {
           />
           <br />
 
-          <Input
+          <CustomInput
             type={"email"}
             name={"email"}
             placeholder={"Email"}
@@ -200,7 +202,7 @@ class Signup extends React.Component {
             isRequired={true}
           />
           <br />
-          <Input
+          <CustomInput
             type={"password"}
             name={"pwrd"}
             placeholder={"Password"}

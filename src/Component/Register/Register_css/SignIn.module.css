@@ -1,10 +1,10 @@
 .input_wrapper {
-  margin-top: 30%;
+  margin-top: 5em;
 }
 .signup input[type="email"],
 .signup input[type="password"] {
   /* font-family: "Patrick Hand SC", cursive; */
-  width: 100%;
+  width: 50vw;
   height: 3em;
   border-radius: 20px;
   padding-left: 3%;
@@ -13,19 +13,17 @@
   border-bottom: 2px solid #494ca2;
   background-color: transparent;
   font-size: 20px;
-  color: #000;
-  /* margin-top: 40px; */
-  /* margin-right: px; */
 }
-
+.signup input::placeholder {
+  color: #494ca2;
+}
 .button[name="Login"] {
   position: absolute;
-  top: 55%;
-  right: 4%;
+  top: 11em;
+  right: 5%;
   width: 15%;
   height: 5.3vh;
   background: linear-gradient(#494ca2, #8186d5);
-  color: #fff;
   outline: none;
   border-style: none;
   font-family: "Patrick Hand SC", cursive;

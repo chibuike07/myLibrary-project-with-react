@@ -2,12 +2,12 @@ import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import RegisterPage from "./Register/SigInSignUp";
 import HomePage from "./HomePage/HomePage";
+import BooksActivities from "./BookTrasction/Book_activities";
 import MemberPage from "./Member/Member";
 import Statistics from "./Statistics/Statistics";
 import Community from "./Library_Community/community";
 import NotFoundPage from "./NotFoundPage";
 import Library from "./library/library";
-import BooksActivities from "./BookTrasction/Book_activities";
 // import DefaultHeader from "./DefaultHeader";
 const Routes = () => {
   return (
