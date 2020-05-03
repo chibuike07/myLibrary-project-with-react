@@ -136,7 +136,12 @@ class BooksActivities extends Component {
     }));
   };
 
+  handleReadDAta = () => {
+    const storage = JSON.parse(localStorage.getItem("collection_data"));
+    this.setState({ tableBodyData: storage });
+  };
   handleSave = () => {
+    console.log(this.state.tableBodyData);
     if (this.state.tableBodyData.length < 1) {
       console.log("prev state");
     } else {
@@ -148,27 +153,10 @@ class BooksActivities extends Component {
             JSON.stringify(this.state.tableBodyData)
           );
         } else {
-          let formData = {
-            name: this.state.name,
-            user_number: this.state.user_number,
-            user_department: this.state.user_department,
-            date: this.state.date,
-            weekday: this.state.weekday,
-            author: this.state.author,
-            title: this.state.title,
-            isbn: this.state.isbn,
-            accession_number: this.state.accession_number,
-            issue_date: this.state.issue_date,
-            return_day: this.state.return_day,
-            total_days: this.state.total_days,
-            added_days: this.state.added_days,
-            fine: this.state.fine
-          };
-          console.log(formData);
-          let storage = JSON.parse(localStorage.getItem("collection_data"));
-          storage.push(formData);
-          localStorage.setItem("collection_data", JSON.stringify(storage));
+          let storage = JSON.parse(localStorage.getItem("collection_date"));
+          storage.push(...this.state.tableBodyData);
           console.log(storage);
+          // localStorage.setItem("collection_data", JSON.stringify(storage));
         }
       } catch (error) {
         console.log("error", error);
@@ -177,6 +165,8 @@ class BooksActivities extends Component {
   };
   componentDidMount() {
     this.handleDay();
+    this.handleReadDAta();
+
     // this.handleTotalDay();
   }
 
