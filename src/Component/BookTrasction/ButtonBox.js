@@ -2,7 +2,13 @@ import React from "react";
 import CustomButton from "../Reuseable.component/Button.component/Button";
 import ButtonBoxStyles from "./booktransaction_styles/BottonBox.module.css";
 
-const ButtonBox = ({ handleAddToTable, handleDayDifferent, handleSave }) => {
+const ButtonBox = ({
+  handleAddToTable,
+  handleDayDifferent,
+  handleSave,
+  handleEdit,
+  handleRemoveCollection
+}) => {
   const { button_wrapper, button } = ButtonBoxStyles;
   return (
     <div className={button_wrapper}>
@@ -29,10 +35,13 @@ const ButtonBox = ({ handleAddToTable, handleDayDifferent, handleSave }) => {
         text={"Edit_Data"}
         className={button}
         backgroundColor={"#494ca2"}
+        click={handleEdit}
       />
-      <CustomButton text={"Remove_Data"} className={button} />
-
-      {/* <button onclick="load(this)">load_books_Data</button> --> */}
+      <CustomButton
+        text={"Remove_Data"}
+        className={button}
+        click={handleRemoveCollection}
+      />
     </div>
   );
 };

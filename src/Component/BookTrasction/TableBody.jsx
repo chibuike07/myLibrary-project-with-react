@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const TableBody = ({ values }) => {
+const TableBody = ({ values, handleTableRowClick }) => {
   const [datas, setData] = useState([]);
   const body = () => {
     setData(values);
@@ -11,7 +11,7 @@ const TableBody = ({ values }) => {
   return (
     <tbody>
       {datas.map((values, i) => (
-        <tr key={i}>
+        <tr key={i} onClick={() => handleTableRowClick(values, i)}>
           <td>{values.name}</td>
           <td>{values.user_number}</td>
           <td>{values.user_department}</td>
