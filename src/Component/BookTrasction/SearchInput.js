@@ -1,15 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import CustomInput from "../Reuseable.component/Input.component/Input";
 import SearchInputStyles from "./booktransaction_styles/SearchInput.module.css";
-const SearchInput = () => {
-  const [filterValue, setFilterValue] = useState({
-    search: ""
-  });
-  const handleChange = ({ target }) => {
-    setFilterValue(prev => ({ ...prev, [target.name]: target.value }));
-    console.log(target.value);
-  };
+const SearchInput = ({ handleChange, state }) => {
   const { searchBox } = SearchInputStyles;
+  let { search } = state;
   return (
     <div className="dom-holders">
       <CustomInput
@@ -17,7 +11,7 @@ const SearchInput = () => {
         placeholder={"search by name"}
         id={"userFil"}
         name={"search"}
-        value={filterValue.search}
+        value={search}
         onChange={handleChange}
         className={searchBox}
         autoComplete={"off"}

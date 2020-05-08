@@ -21,67 +21,24 @@ class BooksActivities extends Component {
     return_day: "",
     total_days: "",
     added_days: "",
-    fine: "0",
+    fine: "",
     tableBodyData: [],
-    rowIndexHolder: ""
-  };
-  Day = [
-    "sunday",
-    "monday",
-    "tuesday",
-    "wednesday",
-    "thursday",
-    "friday",
-    "saturday"
-  ];
-
-  handleDay = () => {
-    this.setState({ weekday: this.Day[new Date().getDay()] });
-  };
-
-  handleDayDifferent = () => {
-    if (this.state.issue_date !== "") {
-      let res =
-        new Date(this.state.return_day).getDate() -
-        new Date(this.state.issue_date).getDate();
-      this.setState({ total_days: Math.abs(res) });
-      this.handleAddedDay();
-    } else if (this.state.return_day === "") {
-      this.setState({ total_days: parseInt(0) });
-    }
-    return;
-  };
-  handleAddedDay = () => {
-    let { total_days } = this.state;
-    if (total_days) {
-      if (total_days > 7) {
-        let res = parseFloat(total_days) - 7;
-        this.setState(() => ({ added_days: res }));
-        // this.handleFine();
-      } else {
-        this.setState({ added_days: "0" });
-      }
-    }
-  };
-  handleFine = () => {
-    let { added_days } = this.state;
-
-    if (added_days) {
-      let res = parseFloat(added_days) * 100;
-      this.setState({ fine: res });
-    }
-    console.log(this.refs.form[13]);
+    rowIndexHolder: "",
+    search: "",
+    day: [
+      "sunday",
+      "monday",
+      "tuesday",
+      "wednesday",
+      "thursday",
+      "friday",
+      "saturday"
+    ]
   };
 
   handleChange = ({ target }) => {
     this.setState(prev => ({ ...prev, [target.name]: target.value }));
   };
-  handleSubmit = e => {
-    e.preventDefault();
-    console.log(this.refs);
-    this.handleAddToTable();
-  };
-  // this.handleAddToTable();
   handleAddToTable = () => {
     // validating the form field
     if (this.state.name === "") {
@@ -125,35 +82,69 @@ class BooksActivities extends Component {
       this.refs.form[9].focus();
       return false;
     }
+    let formData = {
+      name: this.state.name,
+      user_number: this.state.user_number,
+      user_department: this.state.user_department,
+      date: this.state.date,
+      weekday: this.state.weekday,
+      author: this.state.author,
+      title: this.state.title,
+      isbn: this.state.isbn,
+      accession_number: this.state.accession_number,
+      issue_date: this.state.issue_date,
+      return_day: this.state.return_day,
+      total_days: this.state.total_days,
+      added_days: this.state.added_days,
+      fine: this.state.fine
+    };
     //pushing the input values to the state
-    this.setState(prevState => ({
-      tableBodyData: [
-        ...prevState.tableBodyData,
-        {
-          name: this.state.name,
-          user_number: this.state.user_number,
-          user_department: this.state.user_department,
-          date: this.state.date,
-          weekday: this.state.weekday,
-          author: this.state.author,
-          title: this.state.title,
-          isbn: this.state.isbn,
-          accession_number: this.state.accession_number,
-          issue_date: this.state.issue_date,
-          return_day: this.state.return_day,
-          total_days: this.state.total_days,
-          added_days: this.state.added_days,
-          fine: this.state.fine
-        }
-      ]
-    }));
+    this.setState({
+      tableBodyData: this.state.tableBodyData.concat(formData)
+    });
   };
 
-  handleReadDAta = () => {
-    //fetch data from locarage
-    const storage = JSON.parse(localStorage.getItem("collection_data"));
-    this.setState({ tableBodyData: storage });
+  handleDay = () => {
+    let { day } = this.state;
+    this.setState({ weekday: day[new Date().getDay()] });
   };
+
+  handleDayDifferent = () => {
+    if (this.state.issue_date !== "") {
+      let res =
+        new Date(this.state.return_day).getDate() -
+        new Date(this.state.issue_date).getDate();
+      this.setState({ total_days: Math.abs(res) });
+      this.handleAddedDay();
+    } else if (this.state.return_day === "") {
+      this.setState({ total_days: parseInt(0) });
+    }
+    return;
+  };
+  handleAddedDay = () => {
+    let { total_days } = this.state;
+    if (total_days) {
+      if (total_days > 7) {
+        let res = parseFloat(total_days) - 7;
+        this.setState(() => ({ added_days: res }));
+        this.handleFine();
+      } else {
+        this.setState({ added_days: "0" });
+      }
+    }
+  };
+  handleFine = () => {
+    let { added_days } = this.state;
+    if (added_days) {
+      if (added_days !== "0") {
+        let fineToPay = parseFloat(added_days) * 100;
+        this.setState({ fine: String(fineToPay) });
+      } else if (added_days === "0") {
+        this.setState({ fine: "0" });
+      }
+    }
+  };
+
   handleSave = () => {
     //destructured table body data from the state
     let { tableBodyData } = this.state;
@@ -175,15 +166,36 @@ class BooksActivities extends Component {
           //add data to the existint local storage date
           storage.push(...tableBodyData);
           console.log(storage);
+          localStorage.setItem("collection_data", JSON.stringify(storage));
         }
         setTimeout(() => {
           alert("data has been saved successfully");
-        }, 2000);
+        }, 1000);
         //error handler
       } catch (error) {
         console.log("error", error);
       }
     }
+  };
+
+  handleReadDAta = async () => {
+    //fetch data from locarage
+    if (localStorage.getItem("collection_data").length > 0) {
+      console.log("not empty");
+      const storage = await JSON.parse(localStorage.getItem("collection_data"));
+      this.setState({ tableBodyData: storage });
+    } else {
+      console.log("empty");
+    }
+  };
+
+  handleSearchName = () => {
+    let { tableBodyData, search } = this.state;
+    let foundSearch = tableBodyData.filter(v => {
+      return v.name.includes(search);
+    });
+    this.setState({ tableBodyData: foundSearch });
+    console.log(foundSearch);
   };
 
   handleTableClick = (row, rowIndex) => {
@@ -204,6 +216,7 @@ class BooksActivities extends Component {
       accession_number,
       added_days
     } = row;
+    console.log(rowIndex);
     //seting the clicked row to the state to display in the form field
     this.setState({
       name,
@@ -220,7 +233,7 @@ class BooksActivities extends Component {
       weekday,
       accession_number,
       added_days,
-      rowIndexHolder: rowIndex
+      rowIndexHolder: rowIndex + 1
     });
   };
 
@@ -291,23 +304,22 @@ class BooksActivities extends Component {
       let confirm = window.confirm("Are you done adjusting...");
       if (confirm === true) {
         // check if there was a click and if yes splice the table body data and update the particular row that was updated
-        rowIndexHolder &&
-          tableBodyData.splice(rowIndexHolder, 1, {
-            name,
-            user_number,
-            user_department,
-            author,
-            fine,
-            date,
-            isbn,
-            issue_date,
-            return_day,
-            title,
-            total_days,
-            weekday,
-            accession_number,
-            added_days
-          });
+        tableBodyData.splice(rowIndexHolder - 1, 1, {
+          name,
+          user_number,
+          user_department,
+          author,
+          fine,
+          date,
+          isbn,
+          issue_date,
+          return_day,
+          title,
+          total_days,
+          weekday,
+          accession_number,
+          added_days
+        });
         // updating the table body data
         this.setState({ tableBodyData });
         setTimeout(() => {
@@ -324,12 +336,13 @@ class BooksActivities extends Component {
       let confirm = window.confirm("Are sure you want to delete this data");
       if (confirm === true) {
         let dataNotRemoved = tableBodyData.filter(
-          (v, i) => i !== rowIndexHolder
+          (v, i) => i !== rowIndexHolder - 1
         );
         this.setState({ tableBodyData: dataNotRemoved });
+        localStorage.setItem("collection_data", [...dataNotRemoved]);
         setTimeout(() => {
           alert("removed successfully");
-        }, 2000);
+        }, 1000);
       }
       return;
     }
@@ -338,6 +351,11 @@ class BooksActivities extends Component {
     //triggering functions on mount
     this.handleDay();
     this.handleReadDAta();
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.search.length !== this.state.search.length) {
+      this.handleSearchName();
+    }
   }
 
   render() {
@@ -365,10 +383,10 @@ class BooksActivities extends Component {
             ref="form"
             onSubmit={this.handleSubmit}
           >
-            <BoxOne handleChange={this.handleChange} values={this.state} />
+            <BoxOne handleChange={this.handleChange} state={this.state} />
             <BoxTwo
               handleChange={this.handleChange}
-              values={this.state}
+              state={this.state}
               handleFine={this.handleFine}
             />
             {/* <button></button> */}
@@ -381,7 +399,7 @@ class BooksActivities extends Component {
               handleEdit={this.handleEdit}
               handleRemoveCollection={this.handleRemoveCollection}
             />
-            <SearchBar />
+            <SearchBar handleChange={this.handleChange} state={this.state} />
           </div>
         </div>
 

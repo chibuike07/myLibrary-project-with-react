@@ -27,6 +27,7 @@ const SearchForm = () => {
     e.preventDefault();
     console.log(inputValues);
   };
+
   return (
     <div className={form}>
       {/* onSubmit="loadClasses(this)" */}

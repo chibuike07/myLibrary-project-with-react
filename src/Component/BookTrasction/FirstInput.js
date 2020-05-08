@@ -1,7 +1,8 @@
 import React from "react";
 import CustomInput from "../Reuseable.component/Input.component/Input";
 import FirstInputStyles from "./booktransaction_styles/FirstInput.module.css";
-const BoxOne = ({ handleChange, values }) => {
+
+const BoxOne = ({ handleChange, state }) => {
   const {
     name,
     user_number,
@@ -10,7 +11,7 @@ const BoxOne = ({ handleChange, values }) => {
     weekday,
     author,
     title
-  } = values;
+  } = state;
 
   const { box_1, inputBox } = FirstInputStyles;
   return (

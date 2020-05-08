@@ -1,7 +1,7 @@
 import React from "react";
 import CustomInput from "../Reuseable.component/Input.component/Input";
 import SecondInputStyle from "./booktransaction_styles/SecondInput.module.css";
-const BoxTwo = ({ handleChange, values, handleFine }) => {
+const BoxTwo = ({ handleChange, state }) => {
   const {
     isbn,
     accession_number,
@@ -10,7 +10,7 @@ const BoxTwo = ({ handleChange, values, handleFine }) => {
     total_days,
     added_days,
     fine
-  } = values;
+  } = state;
   const { box_2, inputBox } = SecondInputStyle;
   return (
     <div className={box_2}>
@@ -75,7 +75,6 @@ const BoxTwo = ({ handleChange, values, handleFine }) => {
         onChange={handleChange}
         className={inputBox}
         readOnly={true}
-        onInput={handleFine}
       />
 
       <br />
