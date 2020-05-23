@@ -26,7 +26,6 @@ const GetStarted = () => {
   );
 };
 
-
 class RegisterPage extends Component {
   // declaring the states
   state = {
@@ -35,7 +34,8 @@ class RegisterPage extends Component {
     displaySignInBut: false,
     displaySignInBut_bt: true,
     stat: true,
-    count: 0
+    count: 0,
+    datas: []
   };
 
   //function for signup click on click
@@ -67,7 +67,7 @@ class RegisterPage extends Component {
     }
   };
 
-  //function for count of users that visited the page 
+  //function for count of users that visited the page
   VistedCount = () => {
     this.setState({ count: this.state.count + 1 });
     let seTime = setTimeout(this.VistedCount, 5000);
@@ -75,6 +75,18 @@ class RegisterPage extends Component {
   };
   //setting the visited count on component did mount
   componentDidMount() {
+    //getting data from mongodb
+    const fetchOptions = {
+      method: "GET",
+      redirect: "follow"
+    };
+    fetch("http://localhost:4000/registered_members", fetchOptions)
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        this.setState({ datas: data }); //setting the userInformation datas to the state
+      })
+      .catch(err => console.error(err));
     this.VistedCount();
   }
 
@@ -86,9 +98,14 @@ class RegisterPage extends Component {
           <GetStarted />
           <div className={formCont}>
             {this.state.displayForm && (
-              <SignUp signin={this.handleDisplaySignInOnSignUpClick} />
+              <SignUp
+                signin={this.handleDisplaySignInOnSignUpClick}
+                userData={this.state.datas}
+              />
             )}
-            {this.state.displaySignInBut && <SignIn />}
+            {this.state.displaySignInBut && (
+              <SignIn userData={this.state.datas} />
+            )}
           </div>
         </div>
 

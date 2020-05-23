@@ -10,7 +10,8 @@ class SignIn extends React.Component {
   state = {
     //setting input values to the state
     email: "",
-    pwrd: ""
+    pwrd: "",
+    datas: this.props.userData
   };
   handleChange = ({ target }) => {
     //function to handle input values onchange
@@ -25,7 +26,7 @@ class SignIn extends React.Component {
     //getting input values
     let email = this.state.email;
     let password = this.state.pwrd;
-    let userInformation = JSON.parse(localStorage.getItem("userDatas")); //getting the sign up members array
+    let userInformation = this.state.datas; //getting the sign up members array
     let userNames;
     //conditionion the input values
     if (email === "") {
@@ -48,6 +49,7 @@ class SignIn extends React.Component {
     let userObjects = userInformation.filter(
       ({ email, pwrd }) => email.includes(email) && pwrd.includes(password) //getting object of the user that logged in
     );
+    console.log(userObjects);
     let userEmail = userObjects.map(({ email }) => email); //getting the email of the logged in user
     let userPassword = userObjects.map(({ pwrd }) => pwrd); //getting the password of the logged in user
 
@@ -56,7 +58,7 @@ class SignIn extends React.Component {
       alert("log in successful"); //alert if user is registered and getting the first name and last name
       for (let fullName of userObjects) {
         if (fullName) {
-          userNames = `${fullName.fname} ${fullName.lname}`;
+          userNames = `${fullName.sname} ${fullName.oname}`;
         }
       }
       sessionStorage.setItem("loggerName", JSON.stringify(userNames)); //setting the log in user name values to the session storage

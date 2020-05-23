@@ -12,14 +12,14 @@ class Signup extends React.Component {
     borrowedBooks: [],
     reserveBook: [],
     id: [],
-    fname: "",
-    lname: "",
+    sname: "",
+    oname: "",
     gender: "",
     dsp: "",
     num: "",
     email: "",
     pwrd: "",
-    datas: [] //inputs values wrapper
+    datas: this.props.userData //inputs values wrapper
   };
   isNumeric = n => {
     //function that checks for numbers
@@ -33,11 +33,11 @@ class Signup extends React.Component {
       [target.name]: target.value
     }));
   };
-  handleUSerSigUp = e => {
+  handleUSerSigUp = async e => {
     e.preventDefault();
     //declaring and assigning of variable
-    let fname = this.state.fname;
-    let lname = this.state.lname;
+    let sname = this.state.sname;
+    let oname = this.state.oname;
     let gender = this.state.gender;
     let dsp = this.state.dsp;
     let num = this.state.num;
@@ -49,21 +49,21 @@ class Signup extends React.Component {
     let id = this.state.id;
 
     //conditionion the input value datas
-    if (fname === "") {
+    if (sname === "") {
       alert("First name must not be left empty");
-      this.refs.inputs.firstChild.parentNode.children.fname.focus();
+      this.refs.inputs.firstChild.parentNode.children.sname.focus();
       // return false;
-    } else if (this.isNumeric(fname)) {
+    } else if (this.isNumeric(sname)) {
       alert("Number is not an option");
-      this.refs.inputs.firstChild.parentNode.children.fname.focus();
+      this.refs.inputs.firstChild.parentNode.children.sname.focus();
       return false;
-    } else if (this.isNumeric(lname)) {
+    } else if (this.isNumeric(oname)) {
       alert("Number is not an option");
-      this.refs.inputs.firstChild.parentNode.children.lname.focus();
+      this.refs.inputs.firstChild.parentNode.children.oname.focus();
       return false;
-    } else if (lname === "") {
-      alert("Last name must not be left empty");
-      this.refs.inputs.firstChild.parentNode.children.lname.focus();
+    } else if (oname === "") {
+      alert("othername must not be left empty");
+      this.refs.inputs.firstChild.parentNode.children.oname.focus();
       return false;
     } else if (gender === "") {
       alert("Gender must not be left empty");
@@ -104,8 +104,8 @@ class Signup extends React.Component {
     }
     //adding the userInformations to an object
     let userObject = {
-      fname,
-      lname,
+      sname,
+      oname,
       gender,
       dsp,
       num,
@@ -116,11 +116,24 @@ class Signup extends React.Component {
       reserveBook,
       id
     };
-    this.setState(prev => ({ datas: [...prev.datas, userObject] })); //setting the userInformation datas to the state
+    const fetchOptions = {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(userObject)
+    };
+    await fetch("http://localhost:4000/", fetchOptions).catch(err =>
+      console.error(err)
+    );
     this.refs.form.reset(); //reset form on submit
   };
-  //setting the user datas to local storage on componentdidupdate and route to the sign in page
+
+  componentDidMount() {}
+
   componentDidUpdate(prevProps, prevState) {
+    //setting the user datas to local storage on componentdidupdate and route to the sign in page
     if (prevState.datas.length !== this.state.datas.length) {
       if (localStorage.getItem("userDatas") === null) {
         localStorage.setItem("userDatas", JSON.stringify(this.state.datas));
@@ -135,6 +148,7 @@ class Signup extends React.Component {
     }
   }
   render() {
+    console.log(this.state.datas);
     const { input, button, signUpForm } = SignUpStyles; //destructured styles from the style.module
 
     return (
@@ -142,21 +156,21 @@ class Signup extends React.Component {
         <div ref="inputs">
           <CustomInput
             type={"text"}
-            name={"fname"}
-            placeholder={"First name"}
+            name={"sname"}
+            placeholder={"surname"}
             className={input}
             onChange={this.handleChange}
-            value={this.state.fname}
+            value={this.state.sname}
             isRequired={true}
             color={"black"}
           />
           <br />
           <CustomInput
             type={"text"}
-            name={"lname"}
-            placeholder={"Last name"}
+            name={"oname"}
+            placeholder={"other name"}
             className={input}
-            value={this.state.lname}
+            value={this.state.oname}
             onChange={this.handleChange}
             isRequired={true}
           />
