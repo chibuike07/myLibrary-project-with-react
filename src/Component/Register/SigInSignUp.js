@@ -74,13 +74,13 @@ class RegisterPage extends Component {
     clearTimeout(seTime);
   };
   //setting the visited count on component did mount
-  componentDidMount() {
+  async componentDidMount() {
     //getting data from mongodb
     const fetchOptions = {
       method: "GET",
       redirect: "follow"
     };
-    fetch("http://localhost:4000/registered_members", fetchOptions)
+    await fetch("http://localhost:4000/registered_members", fetchOptions)
       .then(res => res.json())
       .then(data => {
         console.log(data);

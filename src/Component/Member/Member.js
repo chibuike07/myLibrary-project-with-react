@@ -4,24 +4,41 @@ class MembersPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      member: []
+      member: [],
+      userDatas: []
     };
   }
 
+  fetchMember = async () => {
+    const fetchOptions = {
+      method: "GET",
+      redirect: "follow"
+    };
+    await fetch("http://localhost:4000/registered_members", fetchOptions)
+      .then(res => res.json())
+      .then(data => {
+        // console.log(data);
+        this.setState({ userDatas: data }); //setting the userInformation datas to the state
+      })
+      .catch(err => console.error(err));
+    this.fetchStorageDatas();
+  };
   fetchStorageDatas = () => {
     let members = this.props.match.params.members;
     let emptyArr = [];
     if (members !== "") {
-      const userData = JSON.parse(localStorage.getItem("userDatas"));
+      const userData = this.state.userDatas;
       for (let value of userData) {
-        let result = `${value.fname} ${value.lname}`;
+        console.log();
+        let result = `${value.sname} ${value.oname}`;
         emptyArr.push(result);
       }
     }
     this.setState({ member: emptyArr });
   };
+
   componentDidMount() {
-    this.fetchStorageDatas();
+    this.fetchMember();
   }
   render() {
     const users =
