@@ -1,5 +1,4 @@
 import React from "react";
-
 class MembersPage extends React.Component {
   constructor(props) {
     super(props);
@@ -9,7 +8,8 @@ class MembersPage extends React.Component {
     };
   }
 
-  fetchMember = async () => {
+  fetchStorageData = async () => {
+    // fetching the data from the mongodb
     const fetchOptions = {
       method: "GET",
       redirect: "follow"
@@ -21,15 +21,17 @@ class MembersPage extends React.Component {
         this.setState({ userDatas: data }); //setting the userInformation datas to the state
       })
       .catch(err => console.error(err));
-    this.fetchStorageDatas();
+    this.fetchMember();
   };
-  fetchStorageDatas = () => {
+  //
+  fetchMember = () => {
+    // fetching the members
     let members = this.props.match.params.members;
     let emptyArr = [];
+    // console.log();
     if (members !== "") {
       const userData = this.state.userDatas;
       for (let value of userData) {
-        console.log();
         let result = `${value.sname} ${value.oname}`;
         emptyArr.push(result);
       }
@@ -38,7 +40,7 @@ class MembersPage extends React.Component {
   };
 
   componentDidMount() {
-    this.fetchMember();
+    this.fetchStorageData();
   }
   render() {
     const users =
