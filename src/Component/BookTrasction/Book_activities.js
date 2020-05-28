@@ -6,6 +6,7 @@ import ButtonBox from "./ButtonBox";
 import TableHead from "./TableHead";
 import TableBody from "./TableBody";
 import Book_activitiesStyles from "./booktransaction_styles/Book_Activities.module.css";
+import axios from "axios";
 class BooksActivities extends Component {
   state = {
     name: "",
@@ -25,6 +26,8 @@ class BooksActivities extends Component {
     tableBodyData: [],
     rowIndexHolder: "",
     search: "",
+    saveCondition: false,
+    _idHolder: "",
     day: [
       "sunday",
       "monday",
@@ -40,68 +43,89 @@ class BooksActivities extends Component {
     this.setState(prev => ({ ...prev, [target.name]: target.value }));
   };
   handleAddToTable = () => {
+    const {
+      name,
+      user_number,
+      user_department,
+      date,
+      weekday,
+      author,
+      title,
+      isbn,
+      accession_number,
+      issue_date,
+      return_day,
+      fine,
+      added_days,
+      total_days
+    } = this.state;
     // validating the form field
-    if (this.state.name === "") {
+    if (name === "") {
       alert(`${this.refs.form[0].name} is required`);
       this.refs.form[0].focus();
       return false;
-    } else if (this.state.user_number === "") {
+    } else if (user_number === "") {
       alert(`${this.refs.form[1].name} is required`);
       this.refs.form[1].focus();
       return false;
-    } else if (this.state.user_department === "") {
+    } else if (user_department === "") {
       alert(`${this.refs.form[2].name} is required`);
       this.refs.form[2].focus();
       return false;
-    } else if (this.state.date === "") {
+    } else if (date === "") {
       alert(`${this.refs.form[3].name} is required`);
       this.refs.form[3].focus();
       return false;
-    } else if (this.state.weekday === "") {
+    } else if (weekday === "") {
       alert(`${this.refs.form[4].name} is required`);
       this.refs.form[4].focus();
       return false;
-    } else if (this.state.author === "") {
+    } else if (author === "") {
       alert(`${this.refs.form[5].name} is required`);
       this.refs.form[5].focus();
       return false;
-    } else if (this.state.title === "") {
+    } else if (title === "") {
       alert(`${this.refs.form[6].name} is required`);
       this.refs.form[6].focus();
       return false;
-    } else if (this.state.isbn === "") {
+    } else if (isbn === "") {
       alert(`${this.refs.form[7].name} is required`);
       this.refs.form[7].focus();
       return false;
-    } else if (this.state.accession_number === "") {
+    } else if (accession_number === "") {
       alert(`${this.refs.form[8].name} is required`);
       this.refs.form[8].focus();
       return false;
-    } else if (this.state.issue_date === "") {
+    } else if (issue_date === "") {
       alert(`${this.refs.form[9].name} is required`);
       this.refs.form[9].focus();
       return false;
     }
+
     let formData = {
-      name: this.state.name,
-      user_number: this.state.user_number,
-      user_department: this.state.user_department,
-      date: this.state.date,
-      weekday: this.state.weekday,
-      author: this.state.author,
-      title: this.state.title,
-      isbn: this.state.isbn,
-      accession_number: this.state.accession_number,
-      issue_date: this.state.issue_date,
-      return_day: this.state.return_day,
-      total_days: this.state.total_days,
-      added_days: this.state.added_days,
-      fine: this.state.fine
+      name,
+      user_number,
+      user_department,
+      date,
+      weekday,
+      author,
+      title,
+      isbn,
+      accession_number,
+      issue_date,
+      return_day,
+      added_days,
+      total_days,
+      fine
     };
     //pushing the input values to the state
     this.setState({
       tableBodyData: this.state.tableBodyData.concat(formData)
     });
+    if (this.state.tableBodyData + 1) {
+      console.log("yes");
+      this.setState({ saveCondition: true });
+    }
   };
 
   handleDay = () => {
@@ -147,43 +171,55 @@ class BooksActivities extends Component {
 
   handleSave = () => {
     //destructured table body data from the state
-    let { tableBodyData } = this.state;
+    const { tableBodyData, saveCondition } = this.state;
     //check if the table data is empty
     if (tableBodyData.length < 1) {
       console.log("prev state");
     } else {
-      //set data to the local storage
-      try {
-        if (localStorage.getItem("collection_date") === null) {
-          localStorage.setItem(
-            "collection_data",
-            JSON.stringify(tableBodyData)
-          );
-        } else {
-          //get the storage data
+      if (saveCondition) {
+        console.log(saveCondition);
+        let lasttransaction = tableBodyData.reduce((a, b) => b);
+        console.log(lasttransaction);
+        //set data to the local storage
+        try {
+          console.log("added to the table");
+          axios.post("http://localhost:4000/book_transaction", lasttransaction);
+          this.setState({ saveCondition: false });
+          // if (localStorage.getItem("collection_date") === null) {
+          //   localStorage.setItem(
+          //     "collection_data",
+          //     JSON.stringify(tableBodyData)
+          //   );
+          // } else {
+          //   //get the storage data
 
-          let storage = JSON.parse(localStorage.getItem("collection_date"));
-          //add data to the existint local storage date
-          storage.push(...tableBodyData);
-          console.log(storage);
-          localStorage.setItem("collection_data", JSON.stringify(storage));
+          //   let storage = JSON.parse(localStorage.getItem("collection_date"));
+          //   //add data to the existint local storage date
+          //   storage.push(...tableBodyData);
+          //   console.log(storage);
+          //   localStorage.setItem("collection_data", JSON.stringify(storage));
+          // }
+          setTimeout(() => {
+            alert("data has been saved successfully");
+          }, 1000);
+          //error handler
+        } catch (error) {
+          console.log("error", error);
         }
-        setTimeout(() => {
-          alert("data has been saved successfully");
-        }, 1000);
-        //error handler
-      } catch (error) {
-        console.log("error", error);
       }
     }
   };
 
   handleReadDAta = async () => {
     //fetch data from locarage
+
     if (localStorage.getItem("collection_data").length > 0) {
       console.log("not empty");
-      const storage = await JSON.parse(localStorage.getItem("collection_data"));
-      this.setState({ tableBodyData: storage });
+      await axios.get("http://localhost:4000/books_transaction").then(res => {
+        this.setState({ tableBodyData: res.data });
+      });
+      // const storage = await JSON.parse(localStorage.getItem("collection_data"));
+      // this.setState({ tableBodyData: storage });
     } else {
       console.log("empty");
     }
@@ -233,6 +269,7 @@ class BooksActivities extends Component {
       weekday,
       accession_number,
       added_days,
+      _idHolder: row._id,
       rowIndexHolder: rowIndex + 1
     });
   };
@@ -320,7 +357,29 @@ class BooksActivities extends Component {
           accession_number,
           added_days
         });
+        let updatedBookData = {
+          name,
+          user_number,
+          user_department,
+          author,
+          fine,
+          date,
+          isbn,
+          issue_date,
+          return_day,
+          title,
+          total_days,
+          weekday,
+          accession_number,
+          added_days
+        };
         // updating the table body data
+
+        axios.put(
+          `http://localhost:4000/books_collection/${this.state._idHolder}`,
+          updatedBookData
+        );
+        console.log(this.state._idHolder);
         this.setState({ tableBodyData });
         setTimeout(() => {
           alert("updated successfully");
@@ -351,6 +410,9 @@ class BooksActivities extends Component {
     //triggering functions on mount
     this.handleDay();
     this.handleReadDAta();
+    if (this.state.tableBodyData.length) {
+      this.setState({ saveCondition: true });
+    }
   }
   componentDidUpdate(prevProps, prevState) {
     if (prevState.search.length !== this.state.search.length) {
@@ -359,6 +421,7 @@ class BooksActivities extends Component {
   }
 
   render() {
+    // console.log(this.state.saveCondition);
     const {
       table_container,
       manual,

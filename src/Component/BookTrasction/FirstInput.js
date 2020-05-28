@@ -28,7 +28,7 @@ const BoxOne = ({ handleChange, state }) => {
       <br />
       <CustomInput
         placeholder={"User Number"}
-        type={"text"}
+        type={"number"}
         name={"user_number"}
         id={"UN"}
         value={user_number}

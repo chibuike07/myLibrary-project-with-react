@@ -57,7 +57,7 @@ const BoxTwo = ({ handleChange, state }) => {
       <br />
       <CustomInput
         placeholder={"Total Days"}
-        type={"text"}
+        type={"number"}
         name={"total_days"}
         id={"TD"}
         value={total_days}
