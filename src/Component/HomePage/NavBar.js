@@ -61,7 +61,13 @@ class NavBar extends Component {
             <CustomLink
               key={i}
               text={text}
-              url={"/" + text}
+              url={() => {
+                if (text === "renew or reserve book") {
+                  return `/library/#auth`;
+                } else {
+                  return `/${text}`;
+                }
+              }}
               id={"join"}
               onMouseOver={this.handleMouseOver}
               onMouseLeave={this.handleMouseout}

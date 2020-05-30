@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import AsideViewStyles from "./LibraryCss _folder/AsideView.module.css";
 import CustomInput from "../Reuseable.component/Input.component/Input";
 import CustomLink from "../Reuseable.component/Link.component/Link";
-
-const InputForBooksTransaction = () => {
+import { withRouter } from "react-router-dom";
+const InputForBooksTransaction = ({ location }) => {
   //destructured styles from asideview styles
   const { input_wrapper, form, library_services } = AsideViewStyles;
   //set the inputvalue initial value to an empty string
@@ -34,9 +34,20 @@ const InputForBooksTransaction = () => {
           console.log(promptForRenewBook);
         }
       }
-      // console.log("renew");
     }
   };
+
+  useEffect(() => {
+    if (location.hash === "#auth") {
+      window.scrollTo(0, 1000);
+      let res = document.getElementById("auth");
+      res.focus();
+      return;
+    } else {
+      console.log("location hash not defined");
+      return;
+    }
+  }, [location]);
   return (
     // <div>
     <div className={input_wrapper}>
@@ -67,4 +78,4 @@ const InputForBooksTransaction = () => {
   );
 };
 
-export default InputForBooksTransaction;
+export default withRouter(InputForBooksTransaction);
