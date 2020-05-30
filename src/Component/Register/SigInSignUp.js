@@ -83,7 +83,7 @@ class RegisterPage extends Component {
     await fetch("http://localhost:4000/registered_members", fetchOptions)
       .then(res => res.json())
       .then(data => {
-        console.log(data);
+        // console.log(data);
         this.setState({ datas: data }); //setting the userInformation datas to the state
       })
       .catch(err => console.error(err));

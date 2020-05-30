@@ -269,7 +269,7 @@ class BooksActivities extends Component {
       weekday,
       accession_number,
       added_days,
-      _idHolder: row._id,
+      _idHolder: row._id, //setting the click data id to the state
       rowIndexHolder: rowIndex + 1
     });
   };
@@ -292,7 +292,8 @@ class BooksActivities extends Component {
       total_days,
       weekday,
       accession_number,
-      added_days
+      added_days,
+      _idHolder
     } = this.state;
 
     //check if there has been a click on any of the collections
@@ -357,6 +358,8 @@ class BooksActivities extends Component {
           accession_number,
           added_days
         });
+
+        //getting the form values to update in the dataBase
         let updatedBookData = {
           name,
           user_number,
@@ -374,9 +377,8 @@ class BooksActivities extends Component {
           added_days
         };
         // updating the table body data
-
         axios.put(
-          `http://localhost:4000/books_collection/${this.state._idHolder}`,
+          `http://localhost:4000/books_collection/${_idHolder}`,
           updatedBookData
         );
         console.log(this.state._idHolder);
@@ -389,16 +391,25 @@ class BooksActivities extends Component {
     }
   };
 
-  handleRemoveCollection = () => {
-    let { rowIndexHolder, tableBodyData } = this.state;
+  handleRemoveCollection = async () => {
+    let { rowIndexHolder, tableBodyData, _idHolder } = this.state;
     if (rowIndexHolder) {
       let confirm = window.confirm("Are sure you want to delete this data");
       if (confirm === true) {
+        let dataRemoved = tableBodyData.filter(
+          (v, i) => i === rowIndexHolder - 1
+        );
         let dataNotRemoved = tableBodyData.filter(
           (v, i) => i !== rowIndexHolder - 1
         );
         this.setState({ tableBodyData: dataNotRemoved });
-        localStorage.setItem("collection_data", [...dataNotRemoved]);
+        console.log(dataRemoved);
+        console.log(_idHolder);
+        await axios.delete(
+          `http://localhost:4000/books_collection/${_idHolder}`,
+          dataRemoved
+        );
+        // localStorage.setItem("collection_data", [...dataNotRemoved]);
         setTimeout(() => {
           alert("removed successfully");
         }, 1000);

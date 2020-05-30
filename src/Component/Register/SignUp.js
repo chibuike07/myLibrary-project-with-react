@@ -130,7 +130,7 @@ class Signup extends React.Component {
     this.refs.form.reset(); //reset form on submit
   };
 
-  componentDidMount() {}
+  // componentDidMount() {}
 
   componentDidUpdate(prevProps, prevState) {
     //setting the user datas to local storage on componentdidupdate and route to the sign in page

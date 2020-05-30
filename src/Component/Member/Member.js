@@ -23,7 +23,7 @@ class MembersPage extends React.Component {
       .catch(err => console.error(err));
     this.fetchMember();
   };
-  //
+  
   fetchMember = () => {
     // fetching the members
     let members = this.props.match.params.members;

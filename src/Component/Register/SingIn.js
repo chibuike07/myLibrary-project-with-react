@@ -50,7 +50,7 @@ class SignIn extends React.Component {
       ({ email, pwrd }) => email.includes(email) && pwrd.includes(password) //getting object of the user that logged in
     );
 
-    console.log(userObjects);
+    // console.log(userObjects);
     let userEmail = userObjects.map(({ email }) => email); //getting the email of the logged in user
     let userPassword = userObjects.map(({ pwrd }) => pwrd); //getting the password of the logged in user
 

@@ -1,5 +1,9 @@
 import React, { Component } from "react";
 import InternetImg from "./Images/booksInt.jpeg";
+import PriterImg from "./Images/printer2.jpeg";
+import ScanaImg from "./Images/scana3.jpeg";
+import ResearchImg from "./Images/research2.jpeg";
+import WifiImg from "./Images/wi-fi.jpeg";
 import LibraryServiceStyle from "./CssFile/LibraryService.module.css";
 import CustomLink from "../Reuseable.component/Link.component/Link.jsx";
 import CustomList from "../Reuseable.component/List.component/List";
@@ -16,16 +20,45 @@ const Image = ({ image, style }) => {
 class LibraryServices extends Component {
   //set image to the state
   state = {
-    image: InternetImg
+    image: [InternetImg]
   };
   //array for library services
   _NavigationForServices = [
-    "internet computers",
-    "printing",
-    "scanning",
-    "research computers",
-    "wifi in the library of unichris"
+    {
+      text: "internet computers",
+      img: InternetImg
+    },
+    {
+      text: "printing",
+      img: PriterImg
+    },
+    {
+      text: "scanning",
+      img: ScanaImg
+    },
+    {
+      text: "research computers",
+      img: ResearchImg
+    },
+    {
+      text: "wifi in the library of unichris",
+      img: WifiImg
+    }
   ];
+
+  handleMouseOver = ({ target }) => {
+    console.log(target.text);
+    for (let txt in this._NavigationForServices) {
+      if (target.text === this._NavigationForServices[txt].text) {
+        this.setState({ image: this._NavigationForServices[txt].img });
+      }
+    }
+  };
+
+  handleMouseLeave = () => {
+    this.setState({ image: this._NavigationForServices[0].img });
+  };
+
   render() {
     //destructured style
     const { comp, fieldset, list, serv } = LibraryServiceStyle;
@@ -35,15 +68,17 @@ class LibraryServices extends Component {
         <br />
         <fieldset className={fieldset}>
           <ol id="set">
-            {this._NavigationForServices.map((services, i) => (
+            {this._NavigationForServices.map(({ text }, i) => (
               <CustomList
                 key={i}
                 text={
                   <CustomLink
-                    text={services}
+                    text={text}
                     url={"/"}
                     color={"#000"}
                     className={list}
+                    onMouseOver={this.handleMouseOver}
+                    onMouseLeave={this.handleMouseLeave}
                   />
                 }
               />
