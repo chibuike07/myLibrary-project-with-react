@@ -128,27 +128,28 @@ class Signup extends React.Component {
       console.error(err)
     );
     this.refs.form.reset(); //reset form on submit
+    alert("sign up successfully");
+    this.props.signin(); //routing to signin page on componentdid update
   };
 
   // componentDidMount() {}
 
-  componentDidUpdate(prevProps, prevState) {
-    //setting the user datas to local storage on componentdidupdate and route to the sign in page
-    if (prevState.datas.length !== this.state.datas.length) {
-      if (localStorage.getItem("userDatas") === null) {
-        localStorage.setItem("userDatas", JSON.stringify(this.state.datas));
-      } else {
-        let storageData = JSON.parse(localStorage.getItem("userDatas"));
-        for (let userObject of this.state.datas) {
-          storageData.push(userObject);
-        }
-        localStorage.setItem("userDatas", JSON.stringify(storageData));
-      }
-      this.props.signin(); //routing to signin page on componentdid update
-    }
-  }
+  // componentDidUpdate(prevProps, prevState) {
+  //   //setting the user datas to local storage on componentdidupdate and route to the sign in page
+  //   if (prevState.datas.length !== this.state.datas.length) {
+  //     // if (localStorage.getItem("userDatas") === null) {
+  //     //   localStorage.setItem("userDatas", JSON.stringify(this.state.datas));
+  //     // } else {
+  //     //   let storageData = JSON.parse(localStorage.getItem("userDatas"));
+  //     //   for (let userObject of this.state.datas) {
+  //     //     storageData.push(userObject);
+  //     //   }
+  //     //   localStorage.setItem("userDatas", JSON.stringify(storageData));
+  //     // }
+  //     // this.props.signin(); //routing to signin page on componentdid update
+  //   }
+  // }
   render() {
-    console.log(this.state.datas);
     const { input, button, signUpForm } = SignUpStyles; //destructured styles from the style.module
 
     return (
