@@ -18,12 +18,13 @@ class BooksActivities extends Component {
     title: "",
     isbn: "",
     accession_number: "",
-    issue_date: "",
-    return_day: "",
-    total_days: "",
-    added_days: "",
-    fine: "",
+    issue_date: new Date().toLocaleDateString(),
+    return_day: new Date().toLocaleDateString(),
+    total_days: 0,
+    added_days: 0,
+    fine: 0,
     tableBodyData: [],
+    signUpMembers: [],
     rowIndexHolder: "",
     search: "",
     saveCondition: false,
@@ -39,10 +40,10 @@ class BooksActivities extends Component {
     ]
   };
 
-  handleChange = ({ target }) => {
+  handleChange = async ({ target }) => {
     this.setState(prev => ({ ...prev, [target.name]: target.value }));
   };
-  handleAddToTable = () => {
+  handleAddToTable = async () => {
     const {
       name,
       user_number,
@@ -118,13 +119,45 @@ class BooksActivities extends Component {
       total_days,
       fine
     };
-    //pushing the input values to the state
-    this.setState({
-      tableBodyData: this.state.tableBodyData.concat(formData)
-    });
-    if (this.state.tableBodyData + 1) {
-      console.log("yes");
-      this.setState({ saveCondition: true });
+    const { tableBodyData } = this.state;
+    if (tableBodyData.length < 1) {
+      console.log("prev state");
+      try {
+        console.log("added to the table");
+        setTimeout(() => {
+          alert("data has been saved successfully");
+        }, 1000);
+        await axios.post("http://localhost:4000/book_transaction", formData);
+        this.setState({ saveCondition: false });
+
+        //error handler
+      } catch (error) {
+        console.log("error", error);
+      }
+    } else {
+      let borrowersNames = tableBodyData.map(({ name }) => name); //got the borrowers name
+      if (borrowersNames.includes(name)) {
+        //check of borrower already exist on the table
+        alert(`${name} already exist on the table`); // pop out a messege
+      } else {
+        try {
+          console.log("added to the table");
+          setTimeout(() => {
+            alert("data has been saved successfully");
+          }, 1000);
+          await axios.post("http://localhost:4000/book_transaction", formData);
+          // this.setState({ saveCondition: false });
+
+          //error handler
+        } catch (error) {
+          console.log("error", error);
+        }
+
+        if (this.state.tableBodyData + 1) {
+          console.log("yes");
+          this.setState({ saveCondition: true });
+        }
+      }
     }
   };
 
@@ -139,90 +172,136 @@ class BooksActivities extends Component {
         new Date(this.state.return_day).getDate() -
         new Date(this.state.issue_date).getDate();
       this.setState({ total_days: Math.abs(res) });
-      this.handleAddedDay();
+      // this.handleAddedDay();
     } else if (this.state.return_day === "") {
       this.setState({ total_days: parseInt(0) });
     }
     return;
   };
-  handleAddedDay = () => {
-    let { total_days } = this.state;
-    if (total_days) {
-      if (total_days > 7) {
-        let res = parseFloat(total_days) - 7;
-        this.setState(() => ({ added_days: res }));
-        this.handleFine();
-      } else {
-        this.setState({ added_days: "0" });
-      }
-    }
-  };
-  handleFine = () => {
-    let { added_days } = this.state;
-    if (added_days) {
-      if (added_days !== "0") {
-        let fineToPay = parseFloat(added_days) * 100;
-        this.setState({ fine: String(fineToPay) });
-      } else if (added_days === "0") {
-        this.setState({ fine: "0" });
-      }
-    }
-  };
+  // handleAddedDay = () => {
+  //   let { total_days } = this.state;
+  //   if (total_days) {
+  //     if (total_days > 7) {
+  //       let res = parseFloat(total_days) - 7;
+  //       this.setState(() => ({ added_days: res }));
+  //       this.handleFine();
+  //     } else {
+  //       this.setState({ added_days: "0" });
+  //     }
+  //   }
+  // };
+  // handleFine = () => {
+  //   let { added_days } = this.state;
+  //   if (added_days) {
+  //     if (added_days !== "0") {
+  //       let fineToPay = parseFloat(added_days) * 100;
+  //       this.setState({ fine: String(fineToPay) });
+  //     } else if (added_days === "0") {
+  //       this.setState({ fine: "0" });
+  //     }
+  //   }
+  // };
 
   handleSave = () => {
-    //destructured table body data from the state
-    const { tableBodyData, saveCondition } = this.state;
-    //check if the table data is empty
-    if (tableBodyData.length < 1) {
-      console.log("prev state");
-    } else {
-      if (saveCondition) {
-        console.log(saveCondition);
-        let lasttransaction = tableBodyData.reduce((a, b) => b);
-        console.log(lasttransaction);
-        //set data to the local storage
-        try {
-          console.log("added to the table");
-          axios.post("http://localhost:4000/book_transaction", lasttransaction);
-          this.setState({ saveCondition: false });
-          // if (localStorage.getItem("collection_date") === null) {
-          //   localStorage.setItem(
-          //     "collection_data",
-          //     JSON.stringify(tableBodyData)
-          //   );
-          // } else {
-          //   //get the storage data
-
-          //   let storage = JSON.parse(localStorage.getItem("collection_date"));
-          //   //add data to the existint local storage date
-          //   storage.push(...tableBodyData);
-          //   console.log(storage);
-          //   localStorage.setItem("collection_data", JSON.stringify(storage));
-          // }
-          setTimeout(() => {
-            alert("data has been saved successfully");
-          }, 1000);
-          //error handler
-        } catch (error) {
-          console.log("error", error);
-        }
-      }
-    }
+    // //destructured table body data from the state
+    // const { tableBodyData, saveCondition, signUpMembers, name } = this.state;
+    // //check if the table data is empty
+    // if (tableBodyData.length < 1) {
+    //   console.log("prev state");
+    // } else {
+    //   if (saveCondition) {
+    //     console.log(saveCondition);
+    //     // let lasttransaction = tableBodyData.reduce((a, b) => b); //getting the last borrowed borrowed
+    //     // let bookIdentity = tableBodyData.filter(books => books.name === name); //getting the book data that match the name of the borrower
+    //     // let updatedBorrowedBooks = null; //setting variable that will hold the borrowed book
+    //     // let memberthatBorrowedABook = signUpMembers.filter(user => {
+    //     //   //getting the user datas that want to borrow a book
+    //     //   let userObject =
+    //     //     `${user.sname} ${user.oname}` === bookIdentity[0].name;
+    //     //   return userObject;
+    //     // });
+    //     // console.log(memberthatBorrowedABook);
+    //     // const {
+    //     //   //destructuring the user data
+    //     //   sname,
+    //     //   oname,
+    //     //   gender,
+    //     //   dsp,
+    //     //   email,
+    //     //   pwrd,
+    //     //   reserveBook,
+    //     //   borrowedBooks,
+    //     //   num,
+    //     //   _id,
+    //     //   bookId,
+    //     //   img
+    //     // } = memberthatBorrowedABook[0];
+    //     // updatedBorrowedBooks = {
+    //     //   //setting the updatedBorrowedBooks to an object
+    //     //   sname,
+    //     //   oname,
+    //     //   gender,
+    //     //   dsp,
+    //     //   email,
+    //     //   pwrd,
+    //     //   reserveBook,
+    //     //   borrowedBooks: [...borrowedBooks, ...bookIdentity], //push the borrowed book to the user borrowed book array
+    //     //   num,
+    //     //   _id,
+    //     //   bookId,
+    //     //   img
+    //     // };
+    //     // console.log(updatedBorrowedBooks);
+    //     // console.log(bookIdentity);
+    //     // let index = signUpMembers.findIndex(
+    //     //   userIndex => userIndex === memberthatBorrowedABook[0]
+    //     // );
+    //     //set data to the local storage
+    //     // try {
+    //     //   console.log("added to the table");
+    //     //   axios.post("http://localhost:4000/book_transaction", lasttransaction);
+    //     //   this.setState({ saveCondition: false });
+    //     //   // axios.put(
+    //     //   //   `http://localhost:4000/registered_members/${this.state._idHolder}`,
+    //     //   //   lasttransaction
+    //     //   // );
+    //     //   // if (localStorage.getItem("collection_date") === null) {
+    //     //   //   localStorage.setItem(
+    //     //   //     "collection_data",
+    //     //   //     JSON.stringify(tableBodyData)
+    //     //   //   );
+    //     //   // } else {
+    //     //   //   //get the storage data
+    //     //   //   let storage = JSON.parse(localStorage.getItem("collection_date"));
+    //     //   //   //add data to the existint local storage date
+    //     //   //   storage.push(...tableBodyData);
+    //     //   //   console.log(storage);
+    //     //   //   localStorage.setItem("collection_data", JSON.stringify(storage));
+    //     //   // }
+    //     //   setTimeout(() => {
+    //     //     alert("data has been saved successfully");
+    //     //   }, 1000);
+    //     //   //error handler
+    //     // } catch (error) {
+    //     //   console.log("error", error);
+    //     // }
+    //   }
+    // }
   };
 
   handleReadDAta = async () => {
     //fetch data from locarage
+    await axios.get("http://localhost:4000/books_transaction").then(res => {
+      this.setState({ tableBodyData: res.data });
+    });
 
-    if (localStorage.getItem("collection_data").length > 0) {
-      console.log("not empty");
-      await axios.get("http://localhost:4000/books_transaction").then(res => {
-        this.setState({ tableBodyData: res.data });
-      });
-      // const storage = await JSON.parse(localStorage.getItem("collection_data"));
-      // this.setState({ tableBodyData: storage });
-    } else {
-      console.log("empty");
-    }
+    // if (localStorage.getItem("collection_data").length > 0) {
+    //   console.log("not empty");
+    // const storage = await JSON.parse(localStorage.getItem("collection_data"));
+    // this.setState({ tableBodyData: storage });
+    // } else {
+    //   console.log("empty");
+    // }
   };
 
   handleSearchName = () => {
@@ -417,7 +496,11 @@ class BooksActivities extends Component {
       return;
     }
   };
-  componentDidMount() {
+  async componentDidMount() {
+    await axios.get("http://localhost:4000/registered_members").then(res => {
+      console.log(res.data);
+      this.setState({ signUpMembers: res.data });
+    });
     //triggering functions on mount
     this.handleDay();
     this.handleReadDAta();
@@ -426,7 +509,18 @@ class BooksActivities extends Component {
     }
   }
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.search.length !== this.state.search.length) {
+    //setting the return day to look out for the issue date and count from the date to current date
+    const { issue_date, search, tableBodyData } = this.state;
+    if (prevProps.tableBodyData !== tableBodyData) {
+      this.handleReadDAta();
+    }
+    if (prevState.issue_date !== issue_date) {
+      let currentDate = new Date().toLocaleDateString();
+      this.setState({ return_day: currentDate });
+      console.log(currentDate);
+    }
+
+    if (prevState.search.length !== search.length) {
       this.handleSearchName();
     }
   }
@@ -461,7 +555,7 @@ class BooksActivities extends Component {
             <BoxTwo
               handleChange={this.handleChange}
               state={this.state}
-              handleFine={this.handleFine}
+              // handleFine={this.handleFine}
             />
             {/* <button></button> */}
           </form>

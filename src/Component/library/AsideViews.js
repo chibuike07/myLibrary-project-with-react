@@ -47,42 +47,85 @@ const InputForBooksTransaction = ({ location }) => {
         );
         return false;
       } else {
-        console.log(memberHadBorrowABook);
-        memberHadBorrowABook.map(({ issue_date, return_day }) => {
-          //check the date different of the book the user want to renew
-          let dateDifferent =
-            new Date(return_day).getDate() - new Date(issue_date).getDate();
-          if (Math.abs(dateDifferent) <= 7) {
-            //checking if the total day is less than or equal to 7days
-            let promptForRenewBook = window.prompt(
-              "please write down the title",
-              ""
-            );
-            if (promptForRenewBook) {
-              //check for clarity
-              let confirmNeed = window.confirm("Are you ok with the spellings");
-              if (confirmNeed === true) {
-                console.log(promptForRenewBook);
-                if (promptForRenewBook) {
-                  let specifiedBookByTitle = bookTransactionData.filter(
-                    //getting the book that match the titled book specified
-                    bookData => bookData.title === promptForRenewBook
-                  );
-                  console.log(specifiedBookByTitle);
-                }
-              }
+        // console.log(memberHadBorrowABook);
+        let res = memberHadBorrowABook.map(
+          (
+            {
+              name,
+              user_number,
+              user_department,
+              author,
+              fine,
+              date,
+              isbn,
+              issue_date,
+              return_day,
+              title,
+              total_days,
+              weekday,
+              accession_number,
+              added_days,
+              _id
+            },
+            i
+          ) => {
+            //check the date different of the book the user want to renew
+            let dateDifferent =
+              new Date(return_day).getDate() - new Date(issue_date).getDate();
+            let currentDate = new Date().toLocaleDateString();
+            if (Math.abs(dateDifferent) <= 7) {
+              let renewBookObject = {
+                name,
+                user_number,
+                user_department,
+                author,
+                fine,
+                date: currentDate,
+                isbn,
+                issue_date: currentDate,
+                return_day: currentDate,
+                title,
+                total_days,
+                weekday,
+                accession_number,
+                added_days
+              };
+              memberHadBorrowABook.splice(i, 1, renewBookObject);
+              return memberHadBorrowABook;
+
+              //checking if the total day is less than or equal to 7days
+              // let promptForRenewBook = window.prompt(
+              //   "please write down the title",
+              //   ""
+              // );
+              // if (promptForRenewBook) {
+              //   //check for clarity
+              //   let confirmNeed = window.confirm("Are you ok with the spellings");
+              //   if (confirmNeed === true) {
+              //     console.log(promptForRenewBook);
+              //     if (promptForRenewBook) {
+              //       let specifiedBookByTitle = bookTransactionData.filter(
+              //         //getting the book that match the titled book specified
+              //         bookData => bookData.title === promptForRenewBook
+              //       );
+              //       console.log(specifiedBookByTitle);
+              //     }
+              //   }
+              // }
+            } else {
+              //things to do if the total day is above 7days
+              let domorageFee = Math.abs(dateDifferent) - 7;
+              return alert(
+                //sending an alert to the user to notify the user on the amounted fee and to return the book to the library
+                `sorry ${signInUser} you are not eligible to renew this book again please kindly return. you amounted fee currectly is ${domorageFee *
+                  100}. Thank you`
+              );
+              //console.log(domorageFee * 100);
             }
-          } else {
-            //things to do if the total day is above 7days
-            let domorageFee = Math.abs(dateDifferent) - 7;
-            alert(
-              //sending an alert to the user to notify the user on the amounted fee and to return the book to the library
-              `sorry ${signInUser} you are not eligible to renew this book again please kindly return. you amounted fee currectly is ${domorageFee *
-                100}. Thank you`
-            );
-            //console.log(domorageFee * 100);
           }
-        });
+        );
+        let { _id } = res[0];
+        axios.put(`http://localhost:4000/books_collection/${_id}`, res[0]);
       }
     }
   };

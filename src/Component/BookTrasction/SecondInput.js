@@ -37,7 +37,7 @@ const BoxTwo = ({ handleChange, state }) => {
       <br />
       <CustomInput
         placeholder={"Issue Date"}
-        type={"date"}
+        type={"text"}
         name={"issue_date"}
         id={"ID"}
         value={issue_date}
@@ -47,12 +47,13 @@ const BoxTwo = ({ handleChange, state }) => {
       <br />
       <CustomInput
         placeholder={"Return Date"}
-        type={"date"}
+        type={"text"}
         name={"return_day"}
         id={"RD"}
         value={return_day}
         onChange={handleChange}
         className={inputBox}
+        readOnly={true}
       />
       <br />
       <CustomInput
