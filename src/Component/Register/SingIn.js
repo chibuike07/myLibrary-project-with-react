@@ -4,6 +4,7 @@ import Input from "../Reuseable.component/Input.component/Input";
 import { withRouter } from "react-router-dom";
 // import { InputRefs } from "../Reuseable.component/Input.component/Input";
 import Button from "../Reuseable.component/Button.component/Button";
+import axios from "axios";
 
 class SignIn extends React.Component {
   //declare a function SignIn
@@ -11,29 +12,29 @@ class SignIn extends React.Component {
     //setting input values to the state
     email: "",
     pwrd: "",
-    datas: this.props.userData
+    httpResponse: null
   };
   handleChange = ({ target }) => {
     //function to handle input values onchange
     this.setState(prevState => ({ ...prevState, [target.name]: target.value })); //setting the input values to the state
   };
-  handleLogInForm = e => {
+
+  handleLogInForm = async e => {
     //function to handle user authentications
     e.preventDefault();
     let { history } = this.props; //destructured history object from this.props
     let refsEmailInput = this.refs.inputs.childNodes["0"]; //targeting email input element from this.refs
     let refsPasswordInput = this.refs.inputs.childNodes["2"]; //targeting password input element from this.refs
     //getting input values
-    let email = this.state.email;
+    let Email = this.state.email;
     let password = this.state.pwrd;
-    let userInformation = this.state.datas; //getting the sign up members array
     let userNames;
     //conditionion the input values
-    if (email === "") {
+    if (Email === "") {
       alert("email must not be left empty");
       refsEmailInput.focus();
       return;
-    } else if (!email.includes("@" && ".")) {
+    } else if (!Email.includes("@" && ".")) {
       alert(`@ or . missing`);
       // this.state.email.focus();
       return;
@@ -46,25 +47,26 @@ class SignIn extends React.Component {
       // this.state.pwrd.focus();
       return;
     }
-    let userObjects = userInformation.filter(
-      ({ email, pwrd }) => email.includes(email) && pwrd.includes(password) //getting object of the user that logged in
-    );
-
-    // console.log(userObjects);
-    let userEmail = userObjects.map(({ email }) => email); //getting the email of the logged in user
-    let userPassword = userObjects.map(({ pwrd }) => pwrd); //getting the password of the logged in user
+    let obj = { Email, password };
+    await axios.post("http://localhost:4000/signin", obj).then(res => {
+      this.setState(() => ({ httpResponse: res.data }));
+      console.log(res.data);
+    });
 
     //comparing the user input values user authentication
-    if (userEmail.includes(email) && userPassword.includes(password)) {
+    const {
+      isMatch,
+      Email: serverEmail,
+      sname,
+      oname
+    } = this.state.httpResponse;
+    if (isMatch === true && serverEmail === Email) {
       alert("log in successful"); //alert if user is registered and getting the first name and last name
-      for (let fullName of userObjects) {
-        if (fullName) {
-          userNames = `${fullName.sname} ${fullName.oname}`;
-        }
+      if (sname) {
+        userNames = `${sname} ${oname}`;
       }
       sessionStorage.setItem("loggerName", JSON.stringify(userNames)); //setting the log in user name values to the session storage
       history.replace("/home"); //routing the logged in user to the home page
-      // location.href = "link.html?userNames=" + userNames;
     } else {
       alert("Email or Password incorrect"); // alert if user input values data does not match any registered users data
       return;

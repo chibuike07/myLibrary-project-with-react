@@ -91,7 +91,7 @@ class RegisterPage extends Component {
   }
 
   render() {
-    console.log(this.state.count);
+    // console.log(this.state.count);
     return (
       <div className={container}>
         <div className={signup}>

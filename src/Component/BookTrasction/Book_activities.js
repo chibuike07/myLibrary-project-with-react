@@ -27,8 +27,8 @@ class BooksActivities extends Component {
     signUpMembers: [],
     rowIndexHolder: "",
     search: "",
-    saveCondition: false,
     _idHolder: "",
+    bookCollection: [],
     day: [
       "sunday",
       "monday",
@@ -119,45 +119,39 @@ class BooksActivities extends Component {
       total_days,
       fine
     };
-    const { tableBodyData } = this.state;
-    if (tableBodyData.length < 1) {
-      console.log("prev state");
-      try {
-        console.log("added to the table");
-        setTimeout(() => {
-          alert("data has been saved successfully");
-        }, 1000);
-        await axios.post("http://localhost:4000/book_transaction", formData);
-        this.setState({ saveCondition: false });
-
-        //error handler
-      } catch (error) {
-        console.log("error", error);
-      }
-    } else {
-      let borrowersNames = tableBodyData.map(({ name }) => name); //got the borrowers name
-      if (borrowersNames.includes(name)) {
-        //check of borrower already exist on the table
-        alert(`${name} already exist on the table`); // pop out a messege
-      } else {
+    const { tableBodyData, bookCollection } = this.state;
+    let libraryCollection = bookCollection.map(({ Title }) => Title);
+    if(libraryCollection.includes(formData.title)){
+      if (tableBodyData.length < 1) {
+        console.log("prev state");
         try {
           console.log("added to the table");
           setTimeout(() => {
             alert("data has been saved successfully");
           }, 1000);
           await axios.post("http://localhost:4000/book_transaction", formData);
-          // this.setState({ saveCondition: false });
-
           //error handler
         } catch (error) {
           console.log("error", error);
         }
-
-        if (this.state.tableBodyData + 1) {
-          console.log("yes");
-          this.setState({ saveCondition: true });
+      } else {
+        let borrowersNames = tableBodyData.map(({ name }) => name); //got the borrowers name
+        if (borrowersNames.includes(name)) {
+          //check of borrower already exist on the table
+          alert(`${name} already exist on the table`); // pop out a messege
+        } else {
+          try {
+            await axios
+              .post("http://localhost:4000/book_transaction", formData)
+              .then(res => console.log("res", res))
+              .catch(err => console.error(err));
+          } catch (err) {
+            console.error("err", err);
+          }
         }
       }
+    }else{
+      alert(`sorry the book with the title ${formData.title} is no longer in collection`)
     }
   };
 
@@ -166,40 +160,16 @@ class BooksActivities extends Component {
     this.setState({ weekday: day[new Date().getDay()] });
   };
 
-  handleDayDifferent = () => {
-    if (this.state.issue_date !== "") {
-      let res =
-        new Date(this.state.return_day).getDate() -
-        new Date(this.state.issue_date).getDate();
-      this.setState({ total_days: Math.abs(res) });
-      // this.handleAddedDay();
-    } else if (this.state.return_day === "") {
-      this.setState({ total_days: parseInt(0) });
-    }
-    return;
-  };
-  // handleAddedDay = () => {
-  //   let { total_days } = this.state;
-  //   if (total_days) {
-  //     if (total_days > 7) {
-  //       let res = parseFloat(total_days) - 7;
-  //       this.setState(() => ({ added_days: res }));
-  //       this.handleFine();
-  //     } else {
-  //       this.setState({ added_days: "0" });
-  //     }
+  // handleDayDifferent = () => {
+  //   if (this.state.issue_date !== "") {
+  //     let res =
+  //       new Date(this.state.return_day).getDate() -
+  //       new Date(this.state.issue_date).getDate();
+  //     this.setState({ total_days: Math.abs(res) });
+  //   } else if (this.state.return_day === "") {
+  //     this.setState({ total_days: parseInt(0) });
   //   }
-  // };
-  // handleFine = () => {
-  //   let { added_days } = this.state;
-  //   if (added_days) {
-  //     if (added_days !== "0") {
-  //       let fineToPay = parseFloat(added_days) * 100;
-  //       this.setState({ fine: String(fineToPay) });
-  //     } else if (added_days === "0") {
-  //       this.setState({ fine: "0" });
-  //     }
-  //   }
+  //   return;
   // };
 
   handleSave = () => {
@@ -501,6 +471,9 @@ class BooksActivities extends Component {
       console.log(res.data);
       this.setState({ signUpMembers: res.data });
     });
+    await axios
+      .get("http://localhost:4000/book_holdings")
+      .then(res => this.setState(() => ({ bookCollection: res.data })));
     //triggering functions on mount
     this.handleDay();
     this.handleReadDAta();
@@ -526,7 +499,7 @@ class BooksActivities extends Component {
   }
 
   render() {
-    // console.log(this.state.saveCondition);
+    // console.log(this.state.bookCollection);
     const {
       table_container,
       manual,
@@ -562,7 +535,7 @@ class BooksActivities extends Component {
           <div className={boxWrapper}>
             <ButtonBox
               handleAddToTable={this.handleAddToTable}
-              handleDayDifferent={this.handleDayDifferent}
+              // handleDayDifferent={this.handleDayDifferent}
               handleSave={this.handleSave}
               handleEdit={this.handleEdit}
               handleRemoveCollection={this.handleRemoveCollection}

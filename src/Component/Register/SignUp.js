@@ -116,6 +116,7 @@ class Signup extends React.Component {
       reserveBook,
       id
     };
+
     const fetchOptions = {
       method: "POST",
       headers: {
@@ -124,12 +125,12 @@ class Signup extends React.Component {
       },
       body: JSON.stringify(userObject)
     };
-    await fetch("http://localhost:4000/", fetchOptions).catch(err =>
-      console.error(err)
-    );
     this.refs.form.reset(); //reset form on submit
     alert("sign up successfully");
     this.props.signin(); //routing to signin page on componentdid update
+    await fetch("http://localhost:4000/", fetchOptions).catch(err =>
+      console.error(err)
+    );
   };
 
   // componentDidMount() {}

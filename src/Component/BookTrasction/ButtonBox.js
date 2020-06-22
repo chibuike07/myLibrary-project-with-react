@@ -4,7 +4,6 @@ import ButtonBoxStyles from "./booktransaction_styles/BottonBox.module.css";
 
 const ButtonBox = ({
   handleAddToTable,
-  handleDayDifferent,
   handleSave,
   handleEdit,
   handleRemoveCollection
@@ -12,25 +11,27 @@ const ButtonBox = ({
   const { button_wrapper, button } = ButtonBoxStyles;
   return (
     <div className={button_wrapper}>
-      <CustomButton
+      {/* <CustomButton
         type={"submit"}
         text={"Check_data"}
-        click={handleDayDifferent}
         backgroundColor={"#494ca2"}
         className={button}
-      />
+      /> */}
+
       <CustomButton
         text={"Add_Data"}
         click={handleAddToTable}
         backgroundColor={"#494ca2"}
         className={button}
       />
-      <CustomButton
+
+      {/* <CustomButton
         text={"Save_data"}
         className={button}
         backgroundColor={"#494ca2"}
         click={handleSave}
-      />
+      /> */}
+
       <CustomButton
         text={"Edit_Data"}
         className={button}
